@@ -13,15 +13,20 @@ public class TextFromFileLoader : MonoBehaviour
     public string filename = "file.txt";
     public int baseFontSize = 18;
 
-    private string fullPath;
+    private string fullFolder;
+
+    void Awake()
+    {
+        fullFolder = "Assets/" + dataFolder;
+    }
 
     void Start()
     {
-        fullPath = "Assets/" + dataFolder + "/" + filename;
-        LoadTextFromFile();
+        string fullPath = fullFolder + "/" + filename;
+        LoadTextFromFile(fullPath);
     }
 
-    void LoadTextFromFile()
+    void LoadTextFromFile(string fullPath)
     {
         if (File.Exists(fullPath))
         {
@@ -68,9 +73,9 @@ public class TextFromFileLoader : MonoBehaviour
         text = Regex.Replace(text, @"^##\s*(.+)$", $"<size=\"{baseFontSize * 1.75}\">$1</size>", RegexOptions.Multiline); // h2
         text = Regex.Replace(text, @"^#\s*(.+)$", $"<size=\"{baseFontSize * 2}\">$1</size>", RegexOptions.Multiline); // h1
         // links
-        text = Regex.Replace(text, @"\[([^\[\] ]+?) (.+?)\]", "<link=\"$1\"><color=\"lightblue\"><u>$2</u></color></link>"); // [external_link display text]
-        text = Regex.Replace(text, @"\[\[(.+?)\]\]", "<link=\"$1\"><color=\"lightblue\"><u>$1</u></color></link>"); // [[internal_link]]
-        text = Regex.Replace(text, @"\[\[(.+?)\|(.+?)\]\]", "<link=\"$1\"><color=\"lightblue\"><u>$2</u></color></link>"); // [[internal_link|display text]]
+        text = Regex.Replace(text, @"\[\[(.+?)\|(.+?)\]\]", "<link=\"int|$1\"><color=\"lightblue\"><u>$2</u></color></link>"); // [[internal_link|display text]]
+        text = Regex.Replace(text, @"\[\[(.+?)\]\]", "<link=\"int|$1\"><color=\"lightblue\"><u>$1</u></color></link>"); // [[internal_link]]
+        text = Regex.Replace(text, @"\[([^\[\] ]+?) (.+?)\]", "<link=\"ext|$1\"><color=\"lightblue\"><u>$2</u>^</color></link>"); // [external_link display text]
         // lists
         text = Regex.Replace(text, @"^(\d+).\s*", "\t$1. ", RegexOptions.Multiline); // numbered
         text = Regex.Replace(text, @"^-\s*", "\t• ", RegexOptions.Multiline); // bulleted
@@ -87,8 +92,29 @@ public class TextFromFileLoader : MonoBehaviour
         {
             TMP_LinkInfo linkInfo = displayText.textInfo.linkInfo[linkIndex];
             string linkID = linkInfo.GetLinkID();
-            Debug.Log("Opening " + linkID);
-            Application.OpenURL(linkID);
+
+            string[] parts = linkID.Split('|');
+            string type = parts[0];
+            string uri = parts[1];
+
+            if (type.Equals("ext"))
+            {
+                ClickExternalLink(uri);
+            }
+            else if (type.Equals("int"))
+            {
+                ClickInternalLink(uri);
+            }
         }
+    }
+
+    private void ClickInternalLink(string file)
+    {
+        LoadTextFromFile(fullFolder + "/" + file);
+    }
+
+    private void ClickExternalLink(string url)
+    {
+        Application.OpenURL(url);
     }
 }
