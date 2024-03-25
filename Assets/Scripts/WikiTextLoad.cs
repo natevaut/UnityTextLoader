@@ -9,15 +9,15 @@ using System.Text.RegularExpressions;
 public class TextFromFileLoader : MonoBehaviour
 {
     public TextMeshProUGUI displayText;
-    public string filename = "loremipsum.txt";
+    public string dataFolder = "Data";
+    public string filename = "file.txt";
     public int baseFontSize = 18;
 
-    private string folder = "Assets/textdata";
     private string fullPath;
 
     void Start()
     {
-        fullPath = folder + "/" + filename;
+        fullPath = "Assets/" + dataFolder + "/" + filename;
         LoadTextFromFile();
     }
 
