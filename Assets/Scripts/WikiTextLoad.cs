@@ -32,7 +32,6 @@ public class TextFromFileLoader : MonoBehaviour
         {
             string rawText = File.ReadAllText(fullPath);
             JsonLoad jsonData = JsonLoad.ParseJson(rawText);
-            XmlLoad.ParseXml(File.ReadAllText(fullFolder + "/" + "lorem.xml")); // debug
 
             displayText.richText = true;
             displayText.text = "<h1>" + jsonData.title + "</h1>";

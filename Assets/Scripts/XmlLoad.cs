@@ -14,12 +14,12 @@ public class PageElement
 }
 
 [System.Serializable]
-public class Page
+public class WholePage
 {
     public string title;
     public List<PageElement> elements;
 
-    public Page()
+    public WholePage()
     {
         this.elements = new List<PageElement>();
     }
@@ -33,7 +33,7 @@ public class Page
 [System.Serializable]
 public class XmlLoad
 {
-    public static XmlDocument ParseXml(string xml)
+    public static WholePage ParseXml(string xml)
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(xml);
@@ -41,9 +41,11 @@ public class XmlLoad
         // <page> is root node
         XmlNodeList pageNodes = xmlDoc.GetElementsByTagName("page");
 
+        List<WholePage> pagesList = new List<WholePage>();
+
         foreach (XmlNode pageNode in pageNodes)
         {
-            Page page = new Page();
+            WholePage page = new WholePage();
             page.title = pageNode.Attributes["title"].Value;
 
             Debug.Log("Page Title: " + page.title);
@@ -70,9 +72,12 @@ public class XmlLoad
                 Debug.Log("Element Text: " + element.text);
             }
 
+            pagesList.Add(page);
+
         }
 
-        return xmlDoc;
+        WholePage root = pagesList[0]; // should only be one root <page> element in the document
+        return root;
     }
 
 }
