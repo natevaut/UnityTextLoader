@@ -13,3 +13,11 @@ public class JsonLoad
         return JsonUtility.FromJson<JsonLoad>(json);
     }
 }
+
+[System.Serializable]
+public class PageContent
+{
+    public string text;
+    public int x, y;
+    public int width, height;
+}
