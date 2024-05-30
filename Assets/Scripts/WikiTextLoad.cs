@@ -31,10 +31,17 @@ public class TextFromFileLoader : MonoBehaviour
         if (File.Exists(fullPath))
         {
             string rawText = File.ReadAllText(fullPath);
-            string parsedText = ParseWikiText(rawText);
+            JsonLoad jsonData = JsonLoad.ParseJson(rawText);
 
             displayText.richText = true;
-            displayText.text = parsedText;
+            displayText.text = "<h1>" + jsonData.title + "</h1>";
+
+            foreach (PageContent item in jsonData.content)
+            {
+                // TODO: x,y,width,height
+                string parsedText = ParseWikiText(item.text);
+                displayText.text += parsedText;
+            }
 
             // gpt below
             // Add an EventTrigger component to the displayText object

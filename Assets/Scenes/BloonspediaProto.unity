@@ -535,7 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 1892413232}
   dataFolder: Data
-  filename: loremipsum.txt
+  filename: lorem.json
   baseFontSize: 20
 --- !u!1 &1892413230
 GameObject:
