@@ -6,11 +6,13 @@ using TMPro;
 using System.IO;
 using System.Text.RegularExpressions;
 
-public class TextFromFileLoader : MonoBehaviour
+public class PageLoader : MonoBehaviour
 {
+    public GameObject textObjectPrefab;
     public TextMeshProUGUI displayText;
+    public GameObject canvasParent;
     public string dataFolder = "Data";
-    public string filename = "file.txt";
+    public string filename = "file.xml";
     public int baseFontSize = 18;
 
     private string fullFolder;
@@ -30,65 +32,29 @@ public class TextFromFileLoader : MonoBehaviour
     {
         if (File.Exists(fullPath))
         {
+            // Load XML
+            XmlLoad xmlLoader = new XmlLoad();
             string rawText = File.ReadAllText(fullPath);
-            JsonLoad jsonData = JsonLoad.ParseJson(rawText);
-            XmlLoad.ParseXml(File.ReadAllText(fullFolder + "/" + "lorem.xml")); // debug
-
-            displayText.richText = true;
-            displayText.text = "<h1>" + jsonData.title + "</h1>";
-
-            foreach (PageContent item in jsonData.content)
-            {
-                // TODO: x,y,width,height
-                string parsedText = ParseWikiText(item.text);
-                displayText.text += parsedText;
-            }
+            xmlLoader.SetCanvas(canvasParent);
+            xmlLoader.ParseXml(rawText);
+            xmlLoader.DisplayAllPages(textObjectPrefab);
 
             // gpt below
             // Add an EventTrigger component to the displayText object
             EventTrigger trigger = displayText.gameObject.AddComponent<EventTrigger>();
-
             // Create a new entry for pointer click event
             EventTrigger.Entry entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.PointerClick;
-
             // Assign a callback to the entry
             entry.callback.AddListener((data) => { OnPointerClick((PointerEventData)data); });
-
             // Add the entry to the trigger
             trigger.triggers.Add(entry);
+            // gpt above
         }
         else
         {
             Debug.LogError("File not found at: " + fullPath);
         }
-    }
-
-    string ParseWikiText(string input)
-    {
-        string text = input;
-
-        // apply defaults
-
-        // formatting
-        text = Regex.Replace(text, @"\*\*(.+?)\*\*", "<b>$1</b>"); // bold
-        text = Regex.Replace(text, @"\*(.+?)\*", "<i>$1</i>"); // italic
-        text = Regex.Replace(text, @"__(.+?)__", "<u>$1</u>"); // underline
-        text = Regex.Replace(text, @"~~(.+?)~~", "<s>$1</s>"); // strike
-        //  headings
-        text = Regex.Replace(text, @"^####\s*(.+)$", $"<size=\"{baseFontSize * 1.25}\">$1</size>", RegexOptions.Multiline); // h4
-        text = Regex.Replace(text, @"^###\s*(.+)$", $"<size=\"{baseFontSize * 1.5}\">$1</size>", RegexOptions.Multiline); // h3
-        text = Regex.Replace(text, @"^##\s*(.+)$", $"<size=\"{baseFontSize * 1.75}\">$1</size>", RegexOptions.Multiline); // h2
-        text = Regex.Replace(text, @"^#\s*(.+)$", $"<size=\"{baseFontSize * 2}\">$1</size>", RegexOptions.Multiline); // h1
-        // links
-        text = Regex.Replace(text, @"\[\[(.+?)\|(.+?)\]\]", "<link=\"int|$1\"><color=\"lightblue\"><u>$2</u></color></link>"); // [[internal_link|display text]]
-        text = Regex.Replace(text, @"\[\[(.+?)\]\]", "<link=\"int|$1\"><color=\"lightblue\"><u>$1</u></color></link>"); // [[internal_link]]
-        text = Regex.Replace(text, @"\[([^\[\] ]+?) (.+?)\]", "<link=\"ext|$1\"><color=\"lightblue\"><u>$2</u>^</color></link>"); // [external_link display text]
-        // lists
-        text = Regex.Replace(text, @"^(\d+).\s*", "\t$1. ", RegexOptions.Multiline); // numbered
-        text = Regex.Replace(text, @"^-\s*", "\t• ", RegexOptions.Multiline); // bulleted
-
-        return text;
     }
 
     public void OnPointerClick(PointerEventData eventData)

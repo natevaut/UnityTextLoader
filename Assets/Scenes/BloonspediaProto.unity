@@ -530,12 +530,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1824724961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81c71c662ab65f94c90bb3e5aff17e77, type: 3}
+  m_Script: {fileID: 11500000, guid: b39b86ddf01bcc047a843e621444aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textObjectPrefab: {fileID: 1892413230}
   displayText: {fileID: 1892413232}
+  canvasParent: {fileID: 394317810}
   dataFolder: Data
-  filename: lorem.json
+  filename: lorem.xml
   baseFontSize: 20
 --- !u!1 &1892413230
 GameObject:

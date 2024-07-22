@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class PageElement
@@ -17,7 +19,8 @@ public class PageElement
 public class Page
 {
     public string title;
-    public List<PageElement> elements;
+
+    private List<PageElement> elements;
 
     public Page()
     {
@@ -26,14 +29,29 @@ public class Page
 
     public void AddElement(PageElement element)
     {
-        elements.Add(element);
+        this.elements.Add(element);
+    }
+
+    public List<PageElement> GetElements()
+    {
+        return this.elements;
     }
 }
+
+// Main class:
 
 [System.Serializable]
 public class XmlLoad
 {
-    public static XmlDocument ParseXml(string xml)
+    private List<Page> pages;
+    private GameObject outputParent;
+
+    public XmlLoad()
+    {
+        this.pages = new List<Page>();
+    }
+
+    public void ParseXml(string xml)
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(xml);
@@ -45,8 +63,6 @@ public class XmlLoad
         {
             Page page = new Page();
             page.title = pageNode.Attributes["title"].Value;
-
-            Debug.Log("Page Title: " + page.title);
 
             // list of <element>s contains the page data
             XmlNodeList elementNodes = pageNode.SelectNodes("element");
@@ -60,19 +76,48 @@ public class XmlLoad
                 element.text = elementNode.InnerText.Trim(); // get text content
 
                 page.AddElement(element);
-
-                // TODO: Add XML data to Unity page
-                Debug.Log("--Element--");
-                Debug.Log("Element X: " + element.x);
-                Debug.Log("Element Y: " + element.y);
-                Debug.Log("Element Width: " + element.width);
-                Debug.Log("Element Height: " + element.height);
-                Debug.Log("Element Text: " + element.text);
             }
 
-        }
+            this.pages.Add(page);
 
-        return xmlDoc;
+        }
+    }
+
+    public List<Page> GetPages()
+    {
+        return this.pages;
+    }
+
+    public void DisplayAllPages(GameObject prefab)
+    {
+        foreach (Page page in this.pages)
+        {
+            foreach (PageElement element in page.GetElements())
+            {
+                DisplayPageElement(prefab, element);
+            }
+        }
+    }
+
+    public void SetCanvas(GameObject canvas)
+    {
+        this.outputParent = canvas;
+    }
+
+    private void DisplayPageElement(GameObject textObjectPrefab, PageElement element)
+    {
+        // Instantiate new text object
+        GameObject textObject = Object.Instantiate(textObjectPrefab);
+        textObject.transform.SetParent(this.outputParent.transform);
+
+        // Set position
+        RectTransform rect = textObject.GetComponent<RectTransform>();
+        rect.anchoredPosition = new Vector2(element.x, element.y);
+        rect.sizeDelta = new Vector2(element.width, element.height);
+
+        // Set text content
+        TextMeshProUGUI textMeshPro = textObject.GetComponent<TextMeshProUGUI>();
+        textMeshPro.text = element.text;
     }
 
 }

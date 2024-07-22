@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page title="Lorem Ipsum">
-    <element x="30" y="50" width="200" height="50">
+    <element x="0" y="0" width="500" height="200">
         Lorem ipsum dolor sit <b>amet</b>!
         <br/>
         Consectetur adipiscing <i>elit</i>.
+    </element>
+    <element x="100" y="100" width="500" height="200">
+        Lorem ipsum...
     </element>
 </page>
