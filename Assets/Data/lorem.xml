@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page title="Lorem Ipsum">
+    <element x="0" y="430" width="630" height="100">
+        <b>Bloonspedia</b>
+        <br/>
+        [Prototype]
+    </element>
+
     <element x="0" y="0" width="500" height="200">
         Lorem ipsum dolor sit <b>amet</b>!
         <br/>
         Consectetur adipiscing <i>elit</i>.
     </element>
-    <element x="100" y="100" width="500" height="200">
+
+    <element x="100" y="500" width="500" height="200">
         Lorem ipsum...
     </element>
 </page>

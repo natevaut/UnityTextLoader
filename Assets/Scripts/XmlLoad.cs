@@ -44,7 +44,6 @@ public class Page
 public class XmlLoad
 {
     private List<Page> pages;
-    private GameObject outputParent;
 
     public XmlLoad()
     {
@@ -88,35 +87,30 @@ public class XmlLoad
         return this.pages;
     }
 
-    public void DisplayAllPages(GameObject prefab)
+    public void DisplayAllPages(GameObject canvasParent)
     {
         foreach (Page page in this.pages)
         {
             foreach (PageElement element in page.GetElements())
             {
-                DisplayPageElement(prefab, element);
+                DisplayPageElement(canvasParent, element);
             }
         }
     }
 
-    public void SetCanvas(GameObject canvas)
-    {
-        this.outputParent = canvas;
-    }
-
-    private void DisplayPageElement(GameObject textObjectPrefab, PageElement element)
+    private void DisplayPageElement(GameObject canvasParent, PageElement element)
     {
         // Instantiate new text object
-        GameObject textObject = Object.Instantiate(textObjectPrefab);
-        textObject.transform.SetParent(this.outputParent.transform);
+        GameObject textObject = new GameObject("TextMeshProObject");
+        textObject.transform.SetParent(canvasParent.transform);
 
         // Set position
-        RectTransform rect = textObject.GetComponent<RectTransform>();
+        RectTransform rect = textObject.AddComponent<RectTransform>();
         rect.anchoredPosition = new Vector2(element.x, element.y);
         rect.sizeDelta = new Vector2(element.width, element.height);
 
         // Set text content
-        TextMeshProUGUI textMeshPro = textObject.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI textMeshPro = textObject.AddComponent<TextMeshProUGUI>();
         textMeshPro.text = element.text;
     }
 
