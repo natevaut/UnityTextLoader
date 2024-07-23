@@ -1,9 +1,5 @@
 # Unity Text Loader
 
-***Proof of concept***
-
-----
-
 Load and parse text content from file for display in Unity.
 
 Page content is stored in XML files. Example:
