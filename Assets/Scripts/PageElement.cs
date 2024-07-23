@@ -9,6 +9,7 @@ public class PageElement
     public int y;
     public int width;
     public int height;
+    public int fontSize;
     // Content
     public string text;
 }

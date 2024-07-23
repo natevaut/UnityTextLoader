@@ -10,7 +10,7 @@ Page content is stored in XML files. Example:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <page title="Lorem Ipsum">
-    <element x="0" y="100" width="500" height="100">
+    <element x="0" y="100" width="500" height="100" fontSize="20">
         Lorem ipsum
     </element>
 </page>

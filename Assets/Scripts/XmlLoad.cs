@@ -8,8 +8,6 @@ using UnityEngine.UI;
 [System.Serializable]
 public class XmlLoad
 {
-    private const int fontSize = 24;
-
     private List<Page> pages;
 
     public XmlLoad()
@@ -40,6 +38,7 @@ public class XmlLoad
                 element.y = tryGetIntAttr(elementNode, "y", 0);
                 element.width = tryGetIntAttr(elementNode, "width", 100);
                 element.height = tryGetIntAttr(elementNode, "height", 100);
+                element.fontSize = tryGetIntAttr(elementNode, "fontSize", 20);
                 // Get text content
                 element.text = elementNode.InnerText.Trim();
 
@@ -89,7 +88,7 @@ public class XmlLoad
 
         // Set font
         textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font
-        textComponent.fontSize = fontSize;
+        textComponent.fontSize = element.fontSize;
         textComponent.alignment = TextAnchor.UpperRight;
     }
 
