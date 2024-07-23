@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 public class PageLoader : MonoBehaviour
 {
     public GameObject canvasParent;
+    public LinkHandler linkHandler;
     public string dataFolder = "Data";
     public string filename = "file.xml";
     public int baseFontSize = 18;
@@ -35,6 +36,7 @@ public class PageLoader : MonoBehaviour
             string rawText = File.ReadAllText(fullPath);
             xmlLoader.ParseXml(rawText);
             xmlLoader.DisplayAllPages(canvasParent);
+            linkHandler.AttachEventsToLinks();
         }
         else
         {
