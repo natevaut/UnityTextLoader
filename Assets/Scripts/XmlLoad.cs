@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PageElement
@@ -43,6 +43,8 @@ public class Page
 [System.Serializable]
 public class XmlLoad
 {
+    private const int fontSize = 24;
+
     private List<Page> pages;
 
     public XmlLoad()
@@ -101,7 +103,7 @@ public class XmlLoad
     private void DisplayPageElement(GameObject canvasParent, PageElement element)
     {
         // Instantiate new text object
-        GameObject textObject = new GameObject("TextMeshProObject");
+        GameObject textObject = new GameObject("TextObject");
         textObject.transform.SetParent(canvasParent.transform);
 
         // Set position
@@ -110,8 +112,13 @@ public class XmlLoad
         rect.sizeDelta = new Vector2(element.width, element.height);
 
         // Set text content
-        TextMeshProUGUI textMeshPro = textObject.AddComponent<TextMeshProUGUI>();
-        textMeshPro.text = element.text;
+        Text textComponent = textObject.AddComponent<Text>();
+        textComponent.text = element.text;
+
+        // Set font
+        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font
+        textComponent.fontSize = fontSize;
+        textComponent.alignment = TextAnchor.UpperRight;
     }
 
 }

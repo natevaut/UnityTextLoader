@@ -11,7 +11,6 @@ public class PageLoader : MonoBehaviour
     public GameObject canvasParent;
     public string dataFolder = "Data";
     public string filename = "file.xml";
-    public int baseFontSize = 18;
 
     private string fullFolder;
 

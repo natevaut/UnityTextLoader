@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page title="Lorem Ipsum">
     <element x="0" y="430" width="630" height="100">
-        <b>Bloonspedia</b>
+        <b>UnityTextLoader</b>
         <br/>
         [Prototype]
     </element>
@@ -12,7 +12,7 @@
         Consectetur adipiscing <i>elit</i>.
     </element>
 
-    <element x="100" y="500" width="500" height="200">
+    <element x="100" y="300" width="200" height="50">
         Lorem ipsum...
     </element>
 </page>
