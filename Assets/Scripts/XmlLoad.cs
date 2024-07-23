@@ -6,41 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class PageElement
-{
-    public int x;
-    public int y;
-    public int width;
-    public int height;
-    public string text;
-}
-
-[System.Serializable]
-public class Page
-{
-    public string title;
-
-    private List<PageElement> elements;
-
-    public Page()
-    {
-        this.elements = new List<PageElement>();
-    }
-
-    public void AddElement(PageElement element)
-    {
-        this.elements.Add(element);
-    }
-
-    public List<PageElement> GetElements()
-    {
-        return this.elements;
-    }
-}
-
-// Main class:
-
-[System.Serializable]
 public class XmlLoad
 {
     private const int fontSize = 24;
