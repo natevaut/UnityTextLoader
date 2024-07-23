@@ -35,11 +35,13 @@ public class XmlLoad
             foreach (XmlNode elementNode in elementNodes)
             {
                 PageElement element = new PageElement();
-                element.x = int.Parse(elementNode.Attributes["x"].Value);
-                element.y = int.Parse(elementNode.Attributes["y"].Value);
-                element.width = int.Parse(elementNode.Attributes["width"].Value);
-                element.height = int.Parse(elementNode.Attributes["height"].Value);
-                element.text = elementNode.InnerText.Trim(); // get text content
+                // Get attributes content with defaults if unset
+                element.x = tryGetIntAttr(elementNode, "x", 0);
+                element.y = tryGetIntAttr(elementNode, "y", 0);
+                element.width = tryGetIntAttr(elementNode, "width", 100);
+                element.height = tryGetIntAttr(elementNode, "height", 100);
+                // Get text content
+                element.text = elementNode.InnerText.Trim();
 
                 page.AddElement(element);
             }
@@ -47,6 +49,11 @@ public class XmlLoad
             this.pages.Add(page);
 
         }
+    }
+
+    private int tryGetIntAttr(XmlNode node, string attr, int defaultVal)
+    {
+        return int.TryParse(node.Attributes[attr]?.Value, out int val) ? val : defaultVal;
     }
 
     public List<Page> GetPages()
