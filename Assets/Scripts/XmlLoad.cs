@@ -38,8 +38,9 @@ public class XmlLoad
                 element.width = tryGetIntAttr(elementNode, "width", 100);
                 element.height = tryGetIntAttr(elementNode, "height", 100);
                 element.fontSize = tryGetIntAttr(elementNode, "fontSize", 20);
-                // Get text content
-                element.text = elementNode.InnerText.Trim();
+                // Get and parse text content
+                string richText = XmlFormatParser.Parse(elementNode.ChildNodes);
+                element.text = richText;
 
                 page.AddElement(element);
             }

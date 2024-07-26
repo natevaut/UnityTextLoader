@@ -31,6 +31,7 @@ public class TextDisplay
         // Set text content
         Text textComponent = textObject.AddComponent<Text>();
         textComponent.text = element.text;
+        textComponent.supportRichText = true;
 
         // Set font
         textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font

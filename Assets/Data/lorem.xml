@@ -13,6 +13,10 @@
     </element>
 
     <element x="100" y="300" width="200" height="50" fontSize="30">
-        Lorem ipsum...
+		<font size="40" color="red">Lorem</font> <font color="blue">ipsum</font>...
     </element>
+
+	<element x="300" width="300" height="250" fontSize="15">
+		Abc<hr/>def
+	</element>
 </page>
