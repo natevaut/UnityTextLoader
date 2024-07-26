@@ -33,7 +33,7 @@ public class PageLoader : MonoBehaviour
             XmlLoad xmlLoader = new XmlLoad();
             string rawText = File.ReadAllText(fullPath);
             xmlLoader.ParseXml(rawText);
-            xmlLoader.DisplayAllPages(canvasParent);
+            TextDisplay.DisplayAllPages(xmlLoader.GetPages(), canvasParent);
         }
         else
         {

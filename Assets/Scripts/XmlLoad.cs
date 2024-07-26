@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
 public class XmlLoad
@@ -58,38 +57,6 @@ public class XmlLoad
     public List<Page> GetPages()
     {
         return this.pages;
-    }
-
-    public void DisplayAllPages(GameObject canvasParent)
-    {
-        foreach (Page page in this.pages)
-        {
-            foreach (PageElement element in page.GetElements())
-            {
-                DisplayPageElement(canvasParent, element);
-            }
-        }
-    }
-
-    private void DisplayPageElement(GameObject canvasParent, PageElement element)
-    {
-        // Instantiate new text object
-        GameObject textObject = new GameObject("TextObject");
-        textObject.transform.SetParent(canvasParent.transform);
-
-        // Set position
-        RectTransform rect = textObject.AddComponent<RectTransform>();
-        rect.anchoredPosition = new Vector2(element.x, element.y);
-        rect.sizeDelta = new Vector2(element.width, element.height);
-
-        // Set text content
-        Text textComponent = textObject.AddComponent<Text>();
-        textComponent.text = element.text;
-
-        // Set font
-        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font
-        textComponent.fontSize = element.fontSize;
-        textComponent.alignment = TextAnchor.UpperRight;
     }
 
 }
