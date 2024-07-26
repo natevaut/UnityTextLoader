@@ -397,11 +397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39b86ddf01bcc047a843e621444aafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayText: {fileID: 0}
   canvasParent: {fileID: 394317810}
+  textDisplayTag: TextDisplay
   dataFolder: Data
   filename: lorem.xml
-  baseFontSize: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

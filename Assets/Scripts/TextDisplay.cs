@@ -6,22 +6,32 @@ using UnityEngine.UI;
 public class TextDisplay
 {
 
-    public static void DisplayAllPages(List<Page> pages, GameObject canvasParent)
+    private PageLoader pageLoader;
+    private GameObject canvasParent;
+
+    public TextDisplay(PageLoader pageLoader, GameObject canvasParent)
+    {
+        this.pageLoader = pageLoader;
+        this.canvasParent = canvasParent;
+    }
+
+    public void DisplayAllPages(List<Page> pages)
     {
         foreach (Page page in pages)
         {
             foreach (PageElement element in page.GetElements())
             {
-                DisplayPageElement(canvasParent, element);
+                DisplayPageElement(element);
             }
         }
     }
 
-    private static void DisplayPageElement(GameObject canvasParent, PageElement element)
+    private void DisplayPageElement(PageElement element)
     {
         // Instantiate new text object
         GameObject textObject = new GameObject("TextObject");
-        textObject.transform.SetParent(canvasParent.transform);
+        textObject.transform.SetParent(this.canvasParent.transform);
+        textObject.tag = pageLoader.textDisplayTag;
 
         // Set position
         RectTransform rect = textObject.AddComponent<RectTransform>();
@@ -37,6 +47,11 @@ public class TextDisplay
         textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font
         textComponent.fontSize = element.fontSize;
         textComponent.alignment = TextAnchor.UpperRight;
+
+        // Add click handler script
+        Hyperlinking clickableText = textObject.AddComponent<Hyperlinking>();
+        clickableText.SetPageLoader(this.pageLoader);
+        clickableText.textComponent = textComponent;
     }
 
 }

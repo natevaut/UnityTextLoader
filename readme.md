@@ -12,8 +12,9 @@ Simply add the PageLoader script to your event object and adjust the settings as
 | Variable | Type | Purpose |
 | -- | -- | -- |
 | Canvas Parent | GameObject | Unity Canvas Object |
-| Data Folder | string | Folder to file XML files in |
-| Filename | string | The XML file to load |
+| Text Display Tag | string | The Unity Tag given to all displayed text |
+| Data Folder | string | The folder containing XML files |
+| Filename | string | The XML file to load within the Data Folder |
 
 Page content is stored in XML files. Example:
 ```xml
@@ -36,3 +37,5 @@ The UnityTextLoader supports the following formatting tags:
 | `<br/>` | Newline | *none* |
 | `<hr/>` | Horizontal rule | *none* |
 | `<font>` | Change font style | `color={string}`<br>`size={int}` |
+| `<link>` | Internal hyperlinking | `to={file.ext}` |
+| `<a>` | External hyperlinking | `href={url}` |

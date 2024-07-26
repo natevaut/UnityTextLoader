@@ -15,7 +15,6 @@ public class XmlFormatParser
 
         // Return stringified output
         string output = stringBuilder.ToString();
-        Debug.Log(output);
         return output;
     }
 
@@ -48,6 +47,14 @@ public class XmlFormatParser
             case "hr":
                 // Horizontal rule
                 output.Append("\n--\n");
+                break;
+            case "link":
+                // Internal hyperlink
+                HandleInternalLink(node, output);
+                break;
+            case "a":
+                // Web URL
+                HandleExternalLink(node, output);
                 break;
             default:
                 if (node.OuterXml.EndsWith("/>"))
@@ -86,5 +93,35 @@ public class XmlFormatParser
             output.Append("</color>");
         if (node.Attributes["size"] != null)
             output.Append("</size>");
+    }
+
+    private static void HandleInternalLink(XmlNode node, StringBuilder output)
+    {
+        string href = node.Attributes["to"]?.Value ?? string.Empty;
+        string linkText = node.InnerText;
+
+        if (!string.IsNullOrEmpty(href))
+        {
+            output.Append("{{" + href + "}}" + " " + linkText);
+        }
+        else
+        {
+            output.Append(linkText);
+        }
+    }
+
+    private static void HandleExternalLink(XmlNode node, StringBuilder output)
+    {
+        string href = node.Attributes["href"]?.Value ?? string.Empty;
+        string linkText = node.InnerText;
+
+        if (!string.IsNullOrEmpty(href))
+        {
+            output.Append("[[" + href + "]]" + " " + linkText);
+        }
+        else
+        {
+            output.Append(linkText);
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 public class PageLoader : MonoBehaviour
 {
     public GameObject canvasParent;
+    public string textDisplayTag = "Finish";
     public string dataFolder = "Data";
     public string filename = "file.xml";
 
@@ -25,7 +26,22 @@ public class PageLoader : MonoBehaviour
         LoadTextFromFile(fullPath);
     }
 
-    void LoadTextFromFile(string fullPath)
+    public void OpenFile(string file)
+    {
+        ClearPage();
+        LoadTextFromFile(fullFolder + "/" + file );
+    }
+
+    private void ClearPage()
+    {
+        GameObject[] textObjects = GameObject.FindGameObjectsWithTag(textDisplayTag);
+        foreach (GameObject textObject in textObjects)
+        {
+            GameObject.Destroy(textObject);
+        }
+    }
+
+    private void LoadTextFromFile(string fullPath)
     {
         if (File.Exists(fullPath))
         {
@@ -33,7 +49,8 @@ public class PageLoader : MonoBehaviour
             XmlLoad xmlLoader = new XmlLoad();
             string rawText = File.ReadAllText(fullPath);
             xmlLoader.ParseXml(rawText);
-            TextDisplay.DisplayAllPages(xmlLoader.GetPages(), canvasParent);
+            TextDisplay textDisplay = new TextDisplay(this, canvasParent);
+            textDisplay.DisplayAllPages(xmlLoader.GetPages());
         }
         else
         {
