@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class TextDisplay
 {
@@ -39,19 +41,51 @@ public class TextDisplay
         rect.sizeDelta = new Vector2(element.width, element.height);
 
         // Set text content
-        Text textComponent = textObject.AddComponent<Text>();
+        TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
         textComponent.text = element.text;
-        textComponent.supportRichText = true;
-
-        // Set font
-        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font
+        textComponent.richText = true;
         textComponent.fontSize = element.fontSize;
-        textComponent.alignment = TextAnchor.UpperRight;
 
-        // Add click handler script
-        Hyperlinking clickableText = textObject.AddComponent<Hyperlinking>();
-        clickableText.SetPageLoader(this.pageLoader);
-        clickableText.textComponent = textComponent;
+        // Add link handling script
+        EventTrigger trigger = textComponent.gameObject.AddComponent<EventTrigger>();
+        // Create a new entry for pointer click event
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        // Assign a callback to the entry
+        entry.callback.AddListener((data) => { OnPointerClick(textComponent, (PointerEventData)data); });
+        // Add the entry to the trigger
+        trigger.triggers.Add(entry);
+    }
+
+    public void OnPointerClick(TextMeshProUGUI displayText, PointerEventData eventData)
+    {
+        Debug.Log("CLICK");
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(displayText, Input.mousePosition, eventData.enterEventCamera);
+
+        if (linkIndex != -1)
+        {
+            TMP_LinkInfo linkInfo = displayText.textInfo.linkInfo[linkIndex];
+            string link = linkInfo.GetLinkID();
+
+            if (link.StartsWith("http"))
+            {
+                ClickExternalLink(link);
+            }
+            else
+            {
+                ClickInternalLink(link);
+            }
+        }
+    }
+
+    private void ClickInternalLink(string file)
+    {
+        pageLoader.OpenFile(file);
+    }
+
+    private void ClickExternalLink(string url)
+    {
+        Application.OpenURL(url);
     }
 
 }
