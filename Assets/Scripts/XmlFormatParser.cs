@@ -95,6 +95,7 @@ public class XmlFormatParser
             output.Append("</size>");
     }
 
+    // Internal link syntax: {{filename}}
     private static void HandleInternalLink(XmlNode node, StringBuilder output)
     {
         string href = node.Attributes["to"]?.Value ?? string.Empty;
@@ -102,7 +103,7 @@ public class XmlFormatParser
 
         if (!string.IsNullOrEmpty(href))
         {
-            output.Append("{{" + href + "}}" + " " + linkText);
+            output.Append("{{" + href + "|" + linkText + "}}");
         }
         else
         {
@@ -110,6 +111,7 @@ public class XmlFormatParser
         }
     }
 
+    // External link syntax: [[url]]
     private static void HandleExternalLink(XmlNode node, StringBuilder output)
     {
         string href = node.Attributes["href"]?.Value ?? string.Empty;
@@ -117,7 +119,7 @@ public class XmlFormatParser
 
         if (!string.IsNullOrEmpty(href))
         {
-            output.Append("[[" + href + "]]" + " " + linkText);
+            output.AppendFormat("<a href=\"{0}\"><color=blue>{1}</color></a>", href, linkText);
         }
         else
         {

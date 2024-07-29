@@ -18,13 +18,13 @@
 
 	<element x="300" width="300" height="250" fontSize="15">
 		Abc<hr/>def
-	</element>
-
-	<element x="100" y="-50" width="300" height="50" fontSize="15">
 		<a href="https://google.com">Google</a>
 	</element>
 
 	<element x="100" y="-100" width="300" height="50" fontSize="15">
-		<link to="ipsum.xml">Go forward</link>
+		<element>
+		    <link to="ipsum.xml">Go forward</link>
+		</element>
+		
 	</element>
 </page>

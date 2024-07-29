@@ -14,6 +14,7 @@ public class PageLoader : MonoBehaviour
     public string filename = "file.xml";
 
     private string fullFolder;
+    private RectTransform rect = null;
 
     void Awake()
     {
@@ -24,6 +25,9 @@ public class PageLoader : MonoBehaviour
     {
         string fullPath = fullFolder + "/" + filename;
         LoadTextFromFile(fullPath);
+
+        if (rect == null)
+            rect = canvasParent.GetComponent<RectTransform>();
     }
 
     public void OpenFile(string file)
@@ -56,5 +60,15 @@ public class PageLoader : MonoBehaviour
         {
             Debug.LogError("File not found at: " + fullPath);
         }
+    }
+
+    public RectTransform GetRect()
+    {
+        return rect;
+    }
+
+    public Camera GetCamera()
+    {
+        return GetComponent<Camera>();
     }
 }

@@ -29,6 +29,16 @@ public class Hyperlinking : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Vector2 localPos;
+        RectTransform rect = pageLoader.GetRect();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rect, eventData.position, pageLoader.GetCamera(), out localPos);
+        Debug.Log(localPos.x + "," + localPos.y);
+        localPos.x += rect.rect.width / 2f;
+        localPos.y += rect.rect.height / 2f;
+        Debug.Log("->"+localPos.x + "," + localPos.y);
+
+
         const string externPattern = @"\[\[(.+?)\]\]";
         const string internPattern = @"\{\{(.+?)\}\}";
 
