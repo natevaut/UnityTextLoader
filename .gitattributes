@@ -1,2 +1,2 @@
 # External packages
-Assets/Packages/** linguist-documentation
+Assets/Packages/**/* linguist-vendored=true
