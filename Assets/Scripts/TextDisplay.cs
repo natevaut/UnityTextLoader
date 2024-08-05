@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
 
 public class TextDisplay
 {
@@ -39,19 +41,43 @@ public class TextDisplay
         rect.sizeDelta = new Vector2(element.width, element.height);
 
         // Set text content
-        Text textComponent = textObject.AddComponent<Text>();
+        TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
         textComponent.text = element.text;
-        textComponent.supportRichText = true;
-
-        // Set font
-        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf"); // default font
-        textComponent.fontSize = element.fontSize;
-        textComponent.alignment = TextAnchor.UpperRight;
+        textComponent.richText = true;
 
         // Add click handler script
-        Hyperlinking clickableText = textObject.AddComponent<Hyperlinking>();
-        clickableText.SetPageLoader(this.pageLoader);
-        clickableText.textComponent = textComponent;
+        EventTrigger trigger = textObject.gameObject.AddComponent<EventTrigger>();
+        // Create a new entry for pointer click event
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        // Assign a callback to the entry
+        entry.callback.AddListener((data) => {
+            OnPointerClick((PointerEventData)data, textComponent);
+        });
+        // Add the entry to the trigger
+        trigger.triggers.Add(entry);
+    }
+
+    void OnPointerClick(PointerEventData eventData, TextMeshProUGUI text)
+    {
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(text, Input.mousePosition, eventData.enterEventCamera);
+
+        if (linkIndex != -1) // if the user has intersected with a link
+        {
+            TMP_LinkInfo linkInfo = text.textInfo.linkInfo[linkIndex];
+            string link = linkInfo.GetLinkID();
+
+            if (link.StartsWith("http"))
+            {
+                // External/web URL
+                Application.OpenURL(link);
+            }
+            else
+            {
+                // Internal page: load the file
+                pageLoader.OpenFile(link);
+            }
+        }
     }
 
 }

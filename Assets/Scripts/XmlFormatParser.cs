@@ -50,11 +50,11 @@ public class XmlFormatParser
                 break;
             case "link":
                 // Internal hyperlink
-                HandleInternalLink(node, output);
+                HandleLink("to", node, output);
                 break;
             case "a":
                 // Web URL
-                HandleExternalLink(node, output);
+                HandleLink("href", node, output);
                 break;
             default:
                 if (node.OuterXml.EndsWith("/>"))
@@ -95,29 +95,16 @@ public class XmlFormatParser
             output.Append("</size>");
     }
 
-    private static void HandleInternalLink(XmlNode node, StringBuilder output)
+    private static void HandleLink(string linkAttr, XmlNode node, StringBuilder output)
     {
-        string href = node.Attributes["to"]?.Value ?? string.Empty;
+        string href = node.Attributes[linkAttr]?.Value ?? string.Empty;
         string linkText = node.InnerText;
 
         if (!string.IsNullOrEmpty(href))
         {
-            output.Append("{{" + href + "}}" + " " + linkText);
-        }
-        else
-        {
-            output.Append(linkText);
-        }
-    }
-
-    private static void HandleExternalLink(XmlNode node, StringBuilder output)
-    {
-        string href = node.Attributes["href"]?.Value ?? string.Empty;
-        string linkText = node.InnerText;
-
-        if (!string.IsNullOrEmpty(href))
-        {
-            output.Append("[[" + href + "]]" + " " + linkText);
+            // Create link
+            // Manual formatting for link display (blue)
+            output.AppendFormat("<link={0}><color=blue>{1}</color></link>", href, linkText);
         }
         else
         {
