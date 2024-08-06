@@ -43,6 +43,7 @@ public class TextDisplay
         // Set text content
         TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
         textComponent.text = element.text;
+        textComponent.fontSize = element.fontSize;
         textComponent.richText = true;
 
         // Add click handler script
