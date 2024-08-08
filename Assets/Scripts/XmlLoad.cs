@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
@@ -40,7 +41,8 @@ public class XmlLoad
                 element.fontSize = tryGetIntAttr(elementNode, "fontSize", 20);
                 // Get and parse text content
                 string richText = XmlFormatParser.Parse(elementNode.ChildNodes);
-                element.text = richText.Trim();
+                string dedentedText = Regex.Replace(richText.Trim(), "^[ \t]+", "", RegexOptions.Multiline);
+                element.text = dedentedText;
 
                 page.AddElement(element);
             }
