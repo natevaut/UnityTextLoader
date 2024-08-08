@@ -47,7 +47,7 @@ public class TextDisplay
         textComponent.richText = true;
 
         // Add click handler script
-        EventTrigger trigger = textObject.gameObject.AddComponent<EventTrigger>();
+        EventTrigger trigger = textObject.AddComponent<EventTrigger>();
         // Create a new entry for pointer click event
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerClick;

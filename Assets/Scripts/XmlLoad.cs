@@ -40,7 +40,7 @@ public class XmlLoad
                 element.fontSize = tryGetIntAttr(elementNode, "fontSize", 20);
                 // Get and parse text content
                 string richText = XmlFormatParser.Parse(elementNode.ChildNodes);
-                element.text = richText;
+                element.text = richText.Trim();
 
                 page.AddElement(element);
             }
