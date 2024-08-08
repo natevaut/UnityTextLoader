@@ -39,10 +39,21 @@ public class XmlLoad
                 element.width = tryGetIntAttr(elementNode, "width", 100);
                 element.height = tryGetIntAttr(elementNode, "height", 100);
                 element.fontSize = tryGetIntAttr(elementNode, "fontSize", 20);
-                // Get and parse text content
-                string richText = XmlFormatParser.Parse(elementNode.ChildNodes);
-                string dedentedText = Regex.Replace(richText.Trim(), "^[ \t]+", "", RegexOptions.Multiline);
-                element.text = dedentedText;
+
+                // Get and parse XML text content
+                string textContent = XmlFormatParser.Parse(elementNode.ChildNodes);
+                textContent = textContent.Trim();
+                var replacements = new Dictionary<string, string>
+                {
+                    { "^[ \t]+", "" }, // remove indents
+                    { "(>)\r?\n", "$1" }, // remove newlines around tags
+                    { "\r?\n", " " }, // collapse newlines to a space when between text
+                };
+                foreach (var replacement in replacements)
+                {
+                    textContent = Regex.Replace(textContent, replacement.Key, replacement.Value, RegexOptions.Multiline);
+                }
+                element.text = textContent;
 
                 page.AddElement(element);
             }

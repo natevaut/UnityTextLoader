@@ -42,11 +42,11 @@ public class XmlFormatParser
                 break;
             case "br":
                 // Newline
-                output.Append("\n");
+                output.Append("<br>");
                 break;
             case "hr":
                 // Horizontal rule
-                output.Append("\n--\n");
+                output.Append("<br>--<br>");
                 break;
             case "link":
                 // Internal hyperlink
@@ -62,7 +62,7 @@ public class XmlFormatParser
                     // Ignore self-closing tags not dealt with above
                     break;
                 }
-                
+
                 // Pass through any other tag
                 string xmlCloser = "</" + node.Name + ">";
                 string xmlOpener = node.OuterXml
