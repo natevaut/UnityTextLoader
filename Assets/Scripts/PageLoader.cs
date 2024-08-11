@@ -10,17 +10,19 @@ public class PageLoader : MonoBehaviour
 {
     public GameObject canvasParent;
     public string textDisplayTag = "Finish";
+    public string dataFolder = "";
     public string filename = "file.xml";
 
     void Start()
     {
-        LoadTextFromFile(filename);
+        // Start by opening initial file
+        OpenFile(FullPath(filename));
     }
 
     public void OpenFile(string filename)
     {
         ClearPage();
-        LoadTextFromFile(filename);
+        LoadTextFromFile(FullPath(filename));
     }
 
     private void ClearPage()
@@ -32,11 +34,11 @@ public class PageLoader : MonoBehaviour
         }
     }
 
-    private void LoadTextFromFile(string filename)
+    private void LoadTextFromFile(string filePath)
     {
         // Load text file
-        string baseFilename = Regex.Replace(filename, @"\.\w+$", ""); // remove extension
-        var textFile = Resources.Load<TextAsset>(baseFilename);
+        string extlessFilePath = Regex.Replace(filePath, @"\.\w+$", ""); // remove extension as resource loader does not use it
+        var textFile = Resources.Load<TextAsset>(extlessFilePath);
         string rawText = textFile.text;
 
         // Load XML from text
@@ -44,5 +46,13 @@ public class PageLoader : MonoBehaviour
         xmlLoader.ParseXml(rawText);
         TextDisplay textDisplay = new TextDisplay(this, canvasParent);
         textDisplay.DisplayAllPages(xmlLoader.GetPages());
+    }
+
+    private string FullPath(string filename)
+    {
+        if (dataFolder == "")
+            return filename;
+        else
+            return dataFolder + "/" + filename;
     }
 }

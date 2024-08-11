@@ -13,7 +13,8 @@ Simply add the PageLoader script to your event object and adjust the settings as
 | -- | -- | -- |
 | Canvas Parent | GameObject | The Unity Canvas game object in the scene. |
 | Text Display Tag | string | The Unity Tag given to all displayed text game objects. |
-| Filename | string | The XML file to load (relative to the `Resources` folder). |
+| Data Folder | string | The folder containing XML files (relative to the `Resources` asset folder). |
+| Filename | string | The XML file to load (relative to the Data Folder). |
 
 Page content is stored in XML files. Example:
 ```xml
@@ -25,7 +26,7 @@ Page content is stored in XML files. Example:
 </page>
 ```
 
-These XML files must be placed inside a `Resources` folder inside the `Assets` folder, at any depth (i.e., matching the pattern `/Assets/**/Resources/**/filename`).
+These XML files must be placed inside a `Resources` folder inside the `Assets` folder, at any depth (i.e., matching the pattern `/Assets/**/Resources/**/`).
 
 ### Formatting
 
