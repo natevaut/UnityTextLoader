@@ -16,7 +16,7 @@ public class PageLoader : MonoBehaviour
     void Start()
     {
         // Start by opening initial file
-        OpenFile(FullPath(filename));
+        OpenFile(filename);
     }
 
     public void OpenFile(string filename)
