@@ -10,26 +10,17 @@ public class PageLoader : MonoBehaviour
 {
     public GameObject canvasParent;
     public string textDisplayTag = "Finish";
-    public string dataFolder = "Data";
     public string filename = "file.xml";
-
-    private string fullFolder;
-
-    void Awake()
-    {
-        fullFolder = "Assets/" + dataFolder;
-    }
 
     void Start()
     {
-        string fullPath = fullFolder + "/" + filename;
-        LoadTextFromFile(fullPath);
+        LoadTextFromFile(filename);
     }
 
-    public void OpenFile(string file)
+    public void OpenFile(string filename)
     {
         ClearPage();
-        LoadTextFromFile(fullFolder + "/" + file );
+        LoadTextFromFile(filename);
     }
 
     private void ClearPage()
@@ -41,20 +32,17 @@ public class PageLoader : MonoBehaviour
         }
     }
 
-    private void LoadTextFromFile(string fullPath)
+    private void LoadTextFromFile(string filename)
     {
-        if (File.Exists(fullPath))
-        {
-            // Load XML
-            XmlLoad xmlLoader = new XmlLoad();
-            string rawText = File.ReadAllText(fullPath);
-            xmlLoader.ParseXml(rawText);
-            TextDisplay textDisplay = new TextDisplay(this, canvasParent);
-            textDisplay.DisplayAllPages(xmlLoader.GetPages());
-        }
-        else
-        {
-            Debug.LogError("File not found at: " + fullPath);
-        }
+        // Load text file
+        string baseFilename = Regex.Replace(filename, @"\.\w+$", ""); // remove extension
+        var textFile = Resources.Load<TextAsset>(baseFilename);
+        string rawText = textFile.text;
+
+        // Load XML from text
+        XmlLoad xmlLoader = new XmlLoad();
+        xmlLoader.ParseXml(rawText);
+        TextDisplay textDisplay = new TextDisplay(this, canvasParent);
+        textDisplay.DisplayAllPages(xmlLoader.GetPages());
     }
 }

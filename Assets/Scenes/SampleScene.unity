@@ -399,7 +399,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasParent: {fileID: 394317810}
   textDisplayTag: TextDisplay
-  dataFolder: Data
   filename: lorem.xml
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
