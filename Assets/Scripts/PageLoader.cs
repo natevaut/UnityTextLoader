@@ -8,15 +8,15 @@ using System.Text.RegularExpressions;
 
 public class PageLoader : MonoBehaviour
 {
-    public GameObject canvasParent;
-    public string textDisplayTag = "Finish";
-    public string dataFolder = "";
-    public string filename = "file.xml";
+    public GameObject CanvasParent;
+    public string TextDisplayTag = "Finish";
+    public string DataFolder = "";
+    public string File = "file.xml";
 
     void Start()
     {
         // Start by opening initial file
-        OpenFile(filename);
+        OpenFile(File);
     }
 
     public void OpenFile(string filename)
@@ -27,7 +27,7 @@ public class PageLoader : MonoBehaviour
 
     private void ClearPage()
     {
-        GameObject[] textObjects = GameObject.FindGameObjectsWithTag(textDisplayTag);
+        GameObject[] textObjects = GameObject.FindGameObjectsWithTag(TextDisplayTag);
         foreach (GameObject textObject in textObjects)
         {
             GameObject.Destroy(textObject);
@@ -44,15 +44,15 @@ public class PageLoader : MonoBehaviour
         // Load XML from text
         XmlLoad xmlLoader = new XmlLoad();
         xmlLoader.ParseXml(rawText);
-        TextDisplay textDisplay = new TextDisplay(this, canvasParent);
+        TextDisplay textDisplay = new TextDisplay(this, CanvasParent);
         textDisplay.DisplayAllPages(xmlLoader.GetPages());
     }
 
     private string FullPath(string filename)
     {
-        if (dataFolder == "")
+        if (DataFolder == "")
             return filename;
         else
-            return dataFolder + "/" + filename;
+            return DataFolder + "/" + filename;
     }
 }

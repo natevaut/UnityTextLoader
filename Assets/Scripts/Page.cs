@@ -4,22 +4,22 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Page
 {
-    public string title;
+    public string Title;
 
-    private List<PageElement> elements;
+    private List<PageElement> _elements;
 
     public Page()
     {
-        this.elements = new List<PageElement>();
+        _elements = new List<PageElement>();
     }
 
     public void AddElement(PageElement element)
     {
-        this.elements.Add(element);
+        _elements.Add(element);
     }
 
     public List<PageElement> GetElements()
     {
-        return this.elements;
+        return _elements;
     }
 }

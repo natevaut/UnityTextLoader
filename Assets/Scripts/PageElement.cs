@@ -5,11 +5,11 @@ using System.Collections.Generic;
 public class PageElement
 {
     // Attributes
-    public int x;
-    public int y;
-    public int width;
-    public int height;
-    public int fontSize;
+    public int X;
+    public int Y;
+    public int Width;
+    public int Height;
+    public int FontSize;
     // Content
-    public string text;
+    public string Text;
 }

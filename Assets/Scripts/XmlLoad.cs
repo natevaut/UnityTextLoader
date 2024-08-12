@@ -8,11 +8,11 @@ using UnityEngine;
 [System.Serializable]
 public class XmlLoad
 {
-    private List<Page> pages;
+    private List<Page> _pages;
 
     public XmlLoad()
     {
-        this.pages = new List<Page>();
+        _pages = new List<Page>();
     }
 
     public void ParseXml(string xml)
@@ -26,7 +26,7 @@ public class XmlLoad
         foreach (XmlNode pageNode in pageNodes)
         {
             Page page = new Page();
-            page.title = pageNode.Attributes["title"].Value;
+            page.Title = pageNode.Attributes["title"].Value;
 
             // list of <element>s contains the page data
             XmlNodeList elementNodes = pageNode.SelectNodes("element");
@@ -34,11 +34,11 @@ public class XmlLoad
             {
                 PageElement element = new PageElement();
                 // Get attributes content with defaults if unset
-                element.x = tryGetIntAttr(elementNode, "x", 0);
-                element.y = tryGetIntAttr(elementNode, "y", 0);
-                element.width = tryGetIntAttr(elementNode, "width", 100);
-                element.height = tryGetIntAttr(elementNode, "height", 100);
-                element.fontSize = tryGetIntAttr(elementNode, "fontSize", 20);
+                element.X = TryGetIntAttr(elementNode, "x", 0);
+                element.Y = TryGetIntAttr(elementNode, "y", 0);
+                element.Width = TryGetIntAttr(elementNode, "width", 100);
+                element.Height = TryGetIntAttr(elementNode, "height", 100);
+                element.FontSize = TryGetIntAttr(elementNode, "fontSize", 20);
 
                 // Get and parse XML text content
                 string textContent = XmlFormatParser.Parse(elementNode.ChildNodes);
@@ -53,24 +53,24 @@ public class XmlLoad
                 {
                     textContent = Regex.Replace(textContent, replacement.Key, replacement.Value, RegexOptions.Multiline);
                 }
-                element.text = textContent;
+                element.Text = textContent;
 
                 page.AddElement(element);
             }
 
-            this.pages.Add(page);
+            _pages.Add(page);
 
         }
     }
 
-    private int tryGetIntAttr(XmlNode node, string attr, int defaultVal)
+    private int TryGetIntAttr(XmlNode node, string attr, int defaultVal)
     {
         return int.TryParse(node.Attributes[attr]?.Value, out int val) ? val : defaultVal;
     }
 
     public List<Page> GetPages()
     {
-        return this.pages;
+        return _pages;
     }
 
 }

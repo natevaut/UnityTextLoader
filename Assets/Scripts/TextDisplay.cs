@@ -8,13 +8,13 @@ using TMPro;
 public class TextDisplay
 {
 
-    private PageLoader pageLoader;
-    private GameObject canvasParent;
+    private PageLoader _pageLoader;
+    private GameObject _canvasParent;
 
     public TextDisplay(PageLoader pageLoader, GameObject canvasParent)
     {
-        this.pageLoader = pageLoader;
-        this.canvasParent = canvasParent;
+        _pageLoader = pageLoader;
+        _canvasParent = canvasParent;
     }
 
     public void DisplayAllPages(List<Page> pages)
@@ -32,18 +32,18 @@ public class TextDisplay
     {
         // Instantiate new text object
         GameObject textObject = new GameObject("TextObject");
-        textObject.transform.SetParent(this.canvasParent.transform);
-        textObject.tag = pageLoader.textDisplayTag;
+        textObject.transform.SetParent(_canvasParent.transform);
+        textObject.tag = _pageLoader.TextDisplayTag;
 
         // Set position
         RectTransform rect = textObject.AddComponent<RectTransform>();
-        rect.anchoredPosition = new Vector2(element.x, element.y);
-        rect.sizeDelta = new Vector2(element.width, element.height);
+        rect.anchoredPosition = new Vector2(element.X, element.Y);
+        rect.sizeDelta = new Vector2(element.Width, element.Height);
 
         // Set text content
         TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
-        textComponent.text = element.text;
-        textComponent.fontSize = element.fontSize;
+        textComponent.text = element.Text;
+        textComponent.fontSize = element.FontSize;
         textComponent.richText = true;
 
         // Add click handler script
@@ -52,9 +52,11 @@ public class TextDisplay
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerClick;
         // Assign a callback to the entry
-        entry.callback.AddListener((data) => {
-            OnPointerClick((PointerEventData)data, textComponent);
-        });
+        entry.callback.AddListener((data) =>
+            {
+                OnPointerClick((PointerEventData)data, textComponent);
+            }
+        );
         // Add the entry to the trigger
         trigger.triggers.Add(entry);
     }
@@ -76,7 +78,7 @@ public class TextDisplay
             else
             {
                 // Internal page: load the file
-                pageLoader.OpenFile(link);
+                _pageLoader.OpenFile(link);
             }
         }
     }
