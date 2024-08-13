@@ -1,0 +1,92 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Declare type for element contents -->
+	<xs:complexType name="elementContents" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<!-- Allowable children -->
+
+			<xs:element name="hr" />
+			<xs:element name="br" />
+
+			<xs:element name="b" type="elementContents" />
+			<xs:element name="i" type="elementContents" />
+
+			<xs:element name="font">
+				<xs:complexType mixed="true">
+					<xs:complexContent>
+						<xs:extension base="elementContents">
+							<xs:attribute name="size" type="xs:string" use="optional" />
+							<xs:attribute name="color" type="xs:string" use="optional" />
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="link">
+				<xs:complexType mixed="true">
+					<xs:complexContent>
+						<xs:extension base="elementContents">
+							<xs:attribute name="to" type="xs:string" use="required" />
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="a">
+				<xs:complexType mixed="true">
+					<xs:complexContent>
+						<xs:extension base="elementContents">
+							<xs:attribute name="href" type="xs:string" use="required" />
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+
+		</xs:choice>
+	</xs:complexType>
+
+	<!-- Root element: <page> -->
+	<xs:element name="page">
+		<xs:complexType>
+			<xs:sequence>
+				<!-- Allowable children -->
+
+				<!-- <title> element (one) -->
+				<xs:element name="title" minOccurs="0" maxOccurs="1" />
+
+				<!-- <element> element (many) -->
+				<xs:element name="element" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<!-- Allowable children -->
+
+							<!-- <translate> elements (many) -->
+							<xs:element name="translate" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType mixed="true">
+									<xs:complexContent>
+										<xs:extension base="elementContents">
+											<xs:attribute name="lang" type="xs:string" use="required" />
+										</xs:extension>
+									</xs:complexContent>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- <default> elements (many) -->
+							<xs:element name="default" type="elementContents" minOccurs="0" maxOccurs="1" />
+
+						</xs:sequence>
+
+						<!-- <element> attributes -->
+						<xs:attribute name="x" type="xs:int" use="optional" />
+						<xs:attribute name="y" type="xs:int" use="optional" />
+						<xs:attribute name="width" type="xs:int" use="optional" />
+						<xs:attribute name="height" type="xs:int" use="optional" />
+						<xs:attribute name="fontSize" type="xs:int" use="optional" />
+
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
