@@ -19,7 +19,8 @@ Simply add the PageLoader script to your event object and adjust the settings as
 Page content is stored in XML files. Example:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<page title="Lorem Ipsum">
+<page>
+    <title>Page Name</title>
     <element x="0" y="100" width="500" height="100" fontSize="20">
         Lorem ipsum
     </element>

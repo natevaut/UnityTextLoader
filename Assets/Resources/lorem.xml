@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<page title="Lorem Ipsum">
-    <element x="0" y="430" width="630" height="100" fontSize="40">
-        <b>UnityTextLoader</b>
-        <br/>
-        [Prototype]
-    </element>
+<page>
+	<title>
+		Lorem Ipsum
+	</title>
 
-    <element width="500" height="200">
-        Lorem ipsum dolor sit <b>amet</b>!
-        <br/>
-        Consectetur adipiscing <i>elit</i>.
-    </element>
+	<element x="0" y="430" width="630" height="100" fontSize="40">
+		<b>UnityTextLoader</b>
+		<br/>
+		[Prototype]
+	</element>
 
-    <element x="100" y="300" width="200" height="50" fontSize="30">
-		<font size="40" color="red">Lorem</font> <font color="blue">ipsum</font>...
-    </element>
+	<element width="500" height="200">
+		Lorem ipsum dolor sit <b>amet</b>!
+		<br/>
+		Consectetur adipiscing <i>elit</i>.
+	</element>
+
+	<element x="100" y="300" width="200" height="50" fontSize="30">
+		<font size="40" color="red">Lorem</font>
+		<font color="blue">ipsum</font>...
+	</element>
 
 	<element x="300" width="300" height="250" fontSize="15">
-		Abc<hr/>def
+		Abc
+		<hr/>
+		def
 	</element>
 
 	<element x="100" y="-50" width="300" height="50" fontSize="15">

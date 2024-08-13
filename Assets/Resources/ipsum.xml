@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<page title="Lorem Ipsum">
-    <element x="0" y="430" width="630" height="100" fontSize="40">
-        <b>UnityTextLoader</b>
-        <br/>
-        [Page 2]
-    </element>
+<page>
+	<title>Ipsum Dolor</title>
+
+	<element x="0" y="430" width="630" height="100" fontSize="40">
+		<b>UnityTextLoader</b>
+		<br/>
+		[Page 2]
+	</element>
 
 	<element x="100" y="10" width="300" height="250" fontSize="20">
-		Abc<hr/>def
+		Abc
+		<hr/>
+		def
 	</element>
 
 	<element x="100" y="0" width="300" height="250" fontSize="20">

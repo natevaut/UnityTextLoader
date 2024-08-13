@@ -26,7 +26,20 @@ public class XmlLoad
         foreach (XmlNode pageNode in pageNodes)
         {
             Page page = new Page();
-            page.Title = pageNode.Attributes["title"].Value;
+
+            // <title> element
+            XmlNodeList titleNodes = pageNode.SelectNodes("title");
+            if (titleNodes.Count > 0)
+            {
+                // take the first <title> element (as there should only be one per <page>)
+                var titleNode = titleNodes.Item(0);
+                string titleText = XmlFormatParser.Parse(titleNode.ChildNodes);
+                page.Title = titleText.Trim();
+            }
+            else
+            {
+                page.Title = "";
+            }
 
             // list of <element>s contains the page data
             XmlNodeList elementNodes = pageNode.SelectNodes("element");
