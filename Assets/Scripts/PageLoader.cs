@@ -12,6 +12,7 @@ public class PageLoader : MonoBehaviour
     public string TextDisplayTag = "Finish";
     public string DataFolder = "";
     public string File = "file.xml";
+    public string Language = "en";
 
     void Start()
     {
@@ -42,7 +43,7 @@ public class PageLoader : MonoBehaviour
         string rawText = textFile.text;
 
         // Load XML from text
-        XmlLoad xmlLoader = new XmlLoad();
+        XmlLoad xmlLoader = new XmlLoad(Language);
         xmlLoader.ParseXml(rawText);
         TextDisplay textDisplay = new TextDisplay(this, CanvasParent);
         textDisplay.DisplayAllPages(xmlLoader.GetPages());

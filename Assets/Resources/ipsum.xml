@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
-	<title>Ipsum Dolor</title>
+	<title>
+		Ipsum Dolor
+	</title>
 
-	<element x="0" y="430" width="630" height="100" fontSize="40">
-		<b>UnityTextLoader</b>
-		<br/>
-		[Page 2]
+	<element x="-200" y="150" width="400" height="100" fontSize="40">
+		<translate lang="en">
+			<b>UnityTextLoader</b>
+			<br />
+			[Page 2]
+		</translate>
+		<translate lang="de">
+			<b>UnityTextLoader</b>
+			<br />
+			[Seite 2]
+		</translate>
 	</element>
 
-	<element x="100" y="10" width="300" height="250" fontSize="20">
+	<element x="100" y="100" width="300" height="250" fontSize="20">
 		Abc
-		<hr/>
+		<hr />
 		def
 	</element>
 
-	<element x="100" y="0" width="300" height="250" fontSize="20">
-		<link to="lorem.xml">Go back</link>
+	<element x="100" y="-100" width="300" height="250" fontSize="35">
+		<translate lang="en">
+			<link to="lorem.xml">Go back</link>
+		</translate>
+		<translate lang="de">
+			<link to="lorem.xml">Geh zurück</link>
+		</translate>
 	</element>
 </page>

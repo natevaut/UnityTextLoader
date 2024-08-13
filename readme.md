@@ -14,15 +14,32 @@ Simply add the PageLoader script to your event object and adjust the settings as
 | Canvas Parent | GameObject | The Unity Canvas game object in the scene. |
 | Text Display Tag | string | The Unity Tag given to all displayed text game objects. |
 | Data Folder | string | The folder containing XML files (relative to the `Resources` asset folder). |
-| Filename | string | The XML file to load (relative to the Data Folder). |
+| File | string | The XML file to load (relative to the Data Folder). |
+| Language | string | The language code of the translation to select from the XML file.
 
 Page content is stored in XML files. Example:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
-    <title>Page Name</title>
+    <title>
+        <translate lang="en">
+            Page Name
+        </translate>
+        <translate lang="de">
+            Seitenname
+        </translate>
+    </title>
     <element x="0" y="100" width="500" height="100" fontSize="20">
+        <!-- No translation tags = all languages will use exactly this content -->
         Lorem ipsum
+    </element>
+    <element x="0" y="-300" width="500" height="100" fontSize="20">
+        <translate lang="en">
+            Content goes <b>here</b>!
+        </translate>
+        <translate lang="de">
+            Inhalt kommt <b>hierher</b>!
+        </translate>
     </element>
 </page>
 ```

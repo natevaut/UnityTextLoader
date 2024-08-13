@@ -4,15 +4,17 @@
 		Lorem Ipsum
 	</title>
 
-	<element x="0" y="430" width="630" height="100" fontSize="40">
-		<b>UnityTextLoader</b>
-		<br/>
-		[Prototype]
+	<element x="-200" y="150" width="400" height="100" fontSize="40">
+		<translate lang="en">
+			<b>UnityTextLoader</b>
+			<br />
+			[Prototype]
+		</translate>
 	</element>
 
 	<element width="500" height="200">
 		Lorem ipsum dolor sit <b>amet</b>!
-		<br/>
+		<br />
 		Consectetur adipiscing <i>elit</i>.
 	</element>
 
@@ -23,7 +25,7 @@
 
 	<element x="300" width="300" height="250" fontSize="15">
 		Abc
-		<hr/>
+		<hr />
 		def
 	</element>
 
@@ -31,7 +33,12 @@
 		<a href="https://google.com">Google</a>
 	</element>
 
-	<element x="100" y="-100" width="300" height="50" fontSize="15">
-		<link to="ipsum.xml">Go forward</link>
+	<element x="100" y="-100" width="300" height="50" fontSize="35">
+		<translate lang="en">
+			<link to="ipsum.xml">Go forward</link>
+		</translate>
+		<translate lang="de">
+			<link to="ipsum.xml">Weiter</link>
+		</translate>
 	</element>
 </page>
