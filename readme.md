@@ -54,7 +54,10 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<page>
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://github.com/Bloonspedia/UnityTextLoader/raw/1.3.0/Schema.xml"
+>
     <title>
         <translate lang="en">
             Page Name
