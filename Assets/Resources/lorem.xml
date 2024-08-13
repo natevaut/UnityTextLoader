@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
 	<title>
-		Lorem Ipsum
+		<default>
+			Lorem Ipsum
+		</default>
 	</title>
 
 	<element x="-200" y="150" width="400" height="100" fontSize="40">
+		<default>
+			<b>UnityTextLoader</b>
+		</default>
 		<translate lang="en">
 			<b>UnityTextLoader</b>
 			<br />
@@ -13,24 +18,32 @@
 	</element>
 
 	<element width="500" height="200">
-		Lorem ipsum dolor sit <b>amet</b>!
-		<br />
-		Consectetur adipiscing <i>elit</i>.
+		<default>
+			Lorem ipsum dolor sit <b>amet</b>!
+			<br />
+			Consectetur adipiscing <i>elit</i>.
+		</default>
 	</element>
 
 	<element x="100" y="300" width="200" height="50" fontSize="30">
-		<font size="40" color="red">Lorem</font>
-		<font color="blue">ipsum</font>...
+		<default>
+			<font size="40" color="red">Lorem</font>
+			<font color="blue">ipsum</font>...
+		</default>
 	</element>
 
 	<element x="300" width="300" height="250" fontSize="15">
-		Abc
-		<hr />
-		def
+		<default>
+			Abc
+			<hr />
+			def
+		</default>
 	</element>
 
 	<element x="100" y="-50" width="300" height="50" fontSize="15">
-		<a href="https://google.com">Google</a>
+		<default>
+			<a href="https://google.com">Google</a>
+		</default>
 	</element>
 
 	<element x="100" y="-100" width="300" height="50" fontSize="35">

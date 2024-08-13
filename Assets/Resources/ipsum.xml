@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
 	<title>
-		Ipsum Dolor
+		<default>
+			Ipsum Dolor
+		</default>
 	</title>
 
 	<element x="-200" y="150" width="400" height="100" fontSize="40">
@@ -18,9 +20,11 @@
 	</element>
 
 	<element x="100" y="100" width="300" height="250" fontSize="20">
-		Abc
-		<hr />
-		def
+		<default>
+			Abc
+			<hr />
+			def
+		</default>
 	</element>
 
 	<element x="100" y="-100" width="300" height="250" fontSize="35">

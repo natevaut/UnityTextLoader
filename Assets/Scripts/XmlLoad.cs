@@ -77,11 +77,10 @@ public class XmlLoad
     {
         // get node containing the selected translation
         XmlNode translationNode = elementNode.SelectSingleNode($"translate[@lang='{_language}']");
-        // fallback: just the first translation element, for if the selected language is not present
-        // (better than showing something broken or empty)
-        XmlNode backupTranslationNode = elementNode.SelectSingleNode("translate");
+        // fallback element for if the selected language is not present or if the text is the same for all languages
+        XmlNode fallbackNode = elementNode.SelectSingleNode("default");
         // set base to either the <translation> child (if present) or the parent <element> itself otherwise
-        XmlNode contentBaseNode = translationNode ?? backupTranslationNode ?? elementNode;
+        XmlNode contentBaseNode = translationNode ?? fallbackNode ?? elementNode;
         // load contents from this base node
         return LoadElementContent(elementNode, contentBaseNode);
     }
@@ -92,7 +91,8 @@ public class XmlLoad
      * The <param name="contentBaseNode">content base node</param> is the child whose content is being processed;
      * i.e., either a &lt;translate> element or the plain children of the parent &lt;element>.
      */
-    private PageElement LoadElementContent(XmlNode elementParentNode, XmlNode contentBaseNode) {
+    private PageElement LoadElementContent(XmlNode elementParentNode, XmlNode contentBaseNode)
+    {
         PageElement element = new PageElement();
         // Get attributes content with defaults if unset
         element.X = TryGetIntAttr(elementParentNode, "x", 0);
