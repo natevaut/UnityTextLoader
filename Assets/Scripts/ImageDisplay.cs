@@ -16,6 +16,9 @@ public class ImageDisplay
         _canvasParent = canvasParent;
     }
 
+    /// <summary>
+    /// Parses and loads several image nodes into the scene.
+    /// </summary>
     public void LoadImages(List<XmlNode> imageNodes)
     {
         foreach (XmlNode node in imageNodes)
@@ -24,9 +27,9 @@ public class ImageDisplay
         }
     }
 
-    /**
-     * Loads an image resource into the scene.
-     */
+    /// <summary>
+    /// Loads an image resource into the scene from a parsed node.
+    /// </summary>
     public void LoadImage(XmlNode node)
     {
         var srcAttribute = node.Attributes["src"]?.Value;

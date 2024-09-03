@@ -71,10 +71,11 @@ public class XmlLoad
         return page;
     }
 
-    /**
-     * Takes an &lt;element> and loads data from its applicable &lt;translate lang> child if present or plain children otherwise.
-     * Returns the created PageElement.
-     */
+    /// <summary>
+    /// Takes an &lt;element> and loads data from its applicable &lt;translate lang> child if present or plain children otherwise.
+    /// </summary>
+    /// <param name="elementNode"></param>
+    /// <returns>The created PageElement.</returns>
     private PageElement LoadElement(XmlNode elementNode)
     {
         // get node containing the selected translation
@@ -87,12 +88,15 @@ public class XmlLoad
         return LoadElementContent(elementNode, contentBaseNode);
     }
 
-    /**
-     * Loads the data of the XML chilren of a given node and returns the created PageElement.
-     * The <param name="elementParentNode">element parent node</param> is the parent &lt;element> whose children are being parsed.
-     * The <param name="contentBaseNode">content base node</param> is the child whose content is being processed;
-     * i.e., either a &lt;translate> element or the plain children of the parent &lt;element>.
-     */
+    /// <summary>
+    /// Loads the data of the XML chilren of a given node.
+    /// </summary>
+    /// <param name="elementParentNode">The parent &lt; element> whose children are being parsed.</param>
+    /// <param name="contentBaseNode">
+    ///     The child whose content is being processed;
+    ///     i.e., either a &lt;translate> element or the plain children of the parent &lt;element>.
+    /// </param>
+    /// <returns>The created PageElement.</returns>
     private PageElement LoadElementContent(XmlNode elementParentNode, XmlNode contentBaseNode)
     {
         PageElement element = new PageElement();

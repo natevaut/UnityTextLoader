@@ -108,7 +108,11 @@ public class XmlFormatParser
         }
     }
 
-    /** Coerce XML-compliant tags into Unity Rich Text format */
+    /// <summary>
+    /// Coerce XML-compliant tags into Unity Rich Text format.
+    /// </summary>
+    /// <param name="node">The node to parse the tags from.</param>
+    /// <param name="output">The string builder object into which output is appended.</param>
     private void HandleFontElement(XmlNode node, StringBuilder output)
     {
         // Handle attributes
