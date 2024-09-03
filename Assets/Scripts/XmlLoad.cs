@@ -95,11 +95,11 @@ public class XmlLoad
     {
         PageElement element = new PageElement();
         // Get attributes content with defaults if unset
-        element.X = TryGetIntAttr(elementParentNode, "x", 0);
-        element.Y = TryGetIntAttr(elementParentNode, "y", 0);
-        element.Width = TryGetIntAttr(elementParentNode, "width", 100);
-        element.Height = TryGetIntAttr(elementParentNode, "height", 100);
-        element.FontSize = TryGetIntAttr(elementParentNode, "fontSize", 20);
+        element.X = Helper.TryGetIntAttr(elementParentNode, "x", 0);
+        element.Y = Helper.TryGetIntAttr(elementParentNode, "y", 0);
+        element.Width = Helper.TryGetIntAttr(elementParentNode, "width", 100);
+        element.Height = Helper.TryGetIntAttr(elementParentNode, "height", 100);
+        element.FontSize = Helper.TryGetIntAttr(elementParentNode, "fontSize", 20);
 
         // Get and parse XML text content
         string textContent = XmlFormatParser.Parse(contentBaseNode.ChildNodes);
@@ -117,15 +117,6 @@ public class XmlLoad
         element.Text = textContent;
 
         return element;
-    }
-
-    /**
-     * Retrieves the int attribute from the element,
-     * or the fallback <param name="defaultVal">default value</param> if not specified.
-     */
-    private int TryGetIntAttr(XmlNode node, string attr, int defaultVal)
-    {
-        return int.TryParse(node.Attributes[attr]?.Value, out int val) ? val : defaultVal;
     }
 
     public List<Page> GetPages()
