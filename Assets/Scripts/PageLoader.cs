@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 public class PageLoader : MonoBehaviour
 {
@@ -45,8 +46,14 @@ public class PageLoader : MonoBehaviour
         // Load XML from text
         XmlLoad xmlLoader = new XmlLoad(Language);
         xmlLoader.ParseXml(rawText);
+        // Display all text elements
+        List<Page> pages = xmlLoader.GetPages();
         TextDisplay textDisplay = new TextDisplay(this, CanvasParent);
-        textDisplay.DisplayAllPages(xmlLoader.GetPages());
+        textDisplay.DisplayAllPages(pages);
+        // Display all image elements
+        List<XmlNode> imageNodes = xmlLoader.GetImageNodes();
+        ImageDisplay imageDisplay = new ImageDisplay(this, CanvasParent);
+        imageDisplay.LoadImages(imageNodes);
     }
 
     private string FullPath(string filename)

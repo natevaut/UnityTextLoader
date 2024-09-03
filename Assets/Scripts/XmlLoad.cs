@@ -10,6 +10,7 @@ public class XmlLoad
 {
     private List<Page> _pages;
     private string _language;
+    private List<XmlNode> _imageNodes = new List<XmlNode>();
 
     public XmlLoad(string lang)
     {
@@ -48,7 +49,8 @@ public class XmlLoad
         XmlNode titleNode = pageNode.SelectSingleNode("title");
         if (titleNode != null)
         {
-            string titleText = XmlFormatParser.Parse(titleNode.ChildNodes);
+            XmlFormatParser parser = new XmlFormatParser();
+            string titleText = parser.Parse(titleNode.ChildNodes);
             page.Title = titleText.Trim();
         }
         else
@@ -102,7 +104,8 @@ public class XmlLoad
         element.FontSize = Helper.TryGetIntAttr(elementParentNode, "fontSize", 20);
 
         // Get and parse XML text content
-        string textContent = XmlFormatParser.Parse(contentBaseNode.ChildNodes);
+        XmlFormatParser parser = new XmlFormatParser();
+        string textContent = parser.Parse(contentBaseNode.ChildNodes);
         textContent = textContent.Trim();
         var replacements = new Dictionary<string, string>
         {
@@ -116,12 +119,23 @@ public class XmlLoad
         }
         element.Text = textContent;
 
+        // Get and save images
+        foreach (XmlNode node in parser.GetImageNodes())
+        {
+            _imageNodes.Add(node);
+        }
+
         return element;
     }
 
     public List<Page> GetPages()
     {
         return _pages;
+    }
+
+    public List<XmlNode> GetImageNodes()
+    {
+        return _imageNodes;
     }
 
 }

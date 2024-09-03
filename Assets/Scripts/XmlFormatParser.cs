@@ -7,7 +7,13 @@ using UnityEngine;
 
 public class XmlFormatParser
 {
-    public static string Parse(XmlNodeList xmlNodes)
+    private List<XmlNode> _imageNodes = new List<XmlNode>();
+
+    public XmlFormatParser()
+    {
+    }
+
+    public string Parse(XmlNodeList xmlNodes)
     {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -18,7 +24,7 @@ public class XmlFormatParser
         return output;
     }
 
-    private static void ParseNodes(XmlNodeList nodes, StringBuilder output)
+    private void ParseNodes(XmlNodeList nodes, StringBuilder output)
     {
         // Parse each child node
         foreach (XmlNode node in nodes)
@@ -27,7 +33,7 @@ public class XmlFormatParser
         }
     }
 
-    private static void ParseNode(XmlNode node, StringBuilder output)
+    private void ParseNode(XmlNode node, StringBuilder output)
     {
         // Parse this node
         string tag = node.Name.ToLower();
@@ -76,6 +82,12 @@ public class XmlFormatParser
                 // Web URL
                 HandleLink("href", node, output);
                 break;
+            case "img":
+                // Save image node for later processing
+                _imageNodes.Add(node);
+                break;
+
+            // Anything else:
             default:
                 if (node.OuterXml.EndsWith("/>"))
                 {
@@ -97,7 +109,7 @@ public class XmlFormatParser
     }
 
     /** Coerce XML-compliant tags into Unity Rich Text format */
-    private static void HandleFontElement(XmlNode node, StringBuilder output)
+    private void HandleFontElement(XmlNode node, StringBuilder output)
     {
         // Handle attributes
         if (node.Attributes["size"] != null)
@@ -115,7 +127,7 @@ public class XmlFormatParser
             output.Append("</size>");
     }
 
-    private static void HandleLink(string linkAttr, XmlNode node, StringBuilder output)
+    private void HandleLink(string linkAttr, XmlNode node, StringBuilder output)
     {
         string href = node.Attributes[linkAttr]?.Value ?? string.Empty;
         string linkText = node.InnerText;
@@ -130,5 +142,10 @@ public class XmlFormatParser
         {
             output.Append(linkText);
         }
+    }
+
+    public List<XmlNode> GetImageNodes()
+    {
+        return _imageNodes;
     }
 }

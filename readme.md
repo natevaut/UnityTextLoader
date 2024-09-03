@@ -50,6 +50,7 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
 | `<font>` | Change font style | `color={string}`<br>`size={int}` |
 | `<link>` | Internal hyperlinking | `to={file.ext}` |
 | `<a>` | External hyperlinking | `href={url}` |
+| `<img>` | Image | `src={path/file}`<br>`x\|y\|width\|height={int}` |
 
 #### Example
 
