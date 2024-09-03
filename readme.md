@@ -46,6 +46,7 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
 | `<hr/>` | Horizontal rule | *none* |
 | `<b>` | Bold | *none* |
 | `<i>` | Italic | *none* |
+| `<h1>`...`<h6>` | Headings | *none* |
 | `<font>` | Change font style | `color={string}`<br>`size={int}` |
 | `<link>` | Internal hyperlinking | `to={file.ext}` |
 | `<a>` | External hyperlinking | `href={url}` |

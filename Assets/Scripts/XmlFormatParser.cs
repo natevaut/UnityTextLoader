@@ -30,7 +30,8 @@ public class XmlFormatParser
     private static void ParseNode(XmlNode node, StringBuilder output)
     {
         // Parse this node
-        switch (node.Name.ToLower())
+        string tag = node.Name.ToLower();
+        switch (tag)
         {
             case "#text":
                 // Text element
@@ -47,6 +48,25 @@ public class XmlFormatParser
             case "hr":
                 // Horizontal rule
                 output.Append("<br>--<br>");
+                break;
+            case "h1":
+            case "h2":
+            case "h3":
+            case "h4":
+            case "h5":
+            case "h6":
+                var sizeMap = new Dictionary<string, int>
+                {
+                    { "h1", 100 },
+                    { "h2", 90 },
+                    { "h3", 80 },
+                    { "h4", 70 },
+                    { "h5", 60 },
+                    { "h6", 50 }
+                };
+                output.AppendFormat("<size={0}><b>", sizeMap[tag]);
+                ParseNodes(node.ChildNodes, output);
+                output.Append("</b></size>");
                 break;
             case "link":
                 // Internal hyperlink
