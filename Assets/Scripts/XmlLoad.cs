@@ -47,7 +47,7 @@ public class XmlLoad
         Page page = new Page();
 
         // singular <title> element
-        XmlNode titleNode = pageNode.SelectSingleNode("title");
+        XmlNode titleNode = ChooseRightTranslation(pageNode.SelectSingleNode("title"));
         if (titleNode != null)
         {
             XmlFormatParser parser = new XmlFormatParser();
@@ -55,7 +55,7 @@ public class XmlLoad
             page.Title = titleText.Trim();
         }
         // singular <desc> element
-        XmlNode descNode = pageNode.SelectSingleNode("description");
+        XmlNode descNode = ChooseRightTranslation(pageNode.SelectSingleNode("description"));
         if (descNode != null)
         {
             XmlFormatParser parser = new XmlFormatParser();
@@ -63,13 +63,16 @@ public class XmlLoad
             page.Description = descText.Trim();
         }
         // singular <keywords> element
-        XmlNode keywordsNode = pageNode.SelectSingleNode("keywords");
+        XmlNode keywordsNode = ChooseRightTranslation(pageNode.SelectSingleNode("keywords"));
         if (keywordsNode != null)
         {
             XmlFormatParser parser = new XmlFormatParser();
             string keywordsList = parser.Parse(keywordsNode.ChildNodes);
             page.Keywords = keywordsList.Trim().Split(",");
         }
+        Debug.Log(page.Title);
+        Debug.Log(page.Description);
+        Debug.Log(String.Join(";", page.Keywords));
 
         // get list of <element>s contains the page data
         XmlNodeList elementNodes = pageNode.SelectNodes("element");
@@ -153,6 +156,26 @@ public class XmlLoad
     public List<XmlNode> GetImageNodes()
     {
         return _imageNodes;
+    }
+
+    private XmlNode ChooseRightTranslation(XmlNode node)
+    {
+        // Return null if no input
+        if (node == null)
+            return null;
+
+        // Select translation node if applicable
+        XmlNode translationNode = node.SelectSingleNode($"translate[@lang='{_language}']");
+        if (translationNode != null)
+            return translationNode;
+        
+        // Select default otherwise
+        XmlNode defaultNode = node.SelectSingleNode("default");
+        if (defaultNode != null)
+            return defaultNode;
+
+        // Return null if neither <translate> nor <default> is found (which is a misuse of the schema)
+        return null;
     }
 
 }

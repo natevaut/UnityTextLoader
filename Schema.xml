@@ -65,6 +65,25 @@
 
 		</xs:choice>
 	</xs:complexType>
+	<xs:complexType name="metadataElement">
+		<xs:sequence>
+			<!-- Allowable children -->
+
+			<!-- <translate> elements (many) -->
+			<xs:element name="translate" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType mixed="true">
+					<xs:complexContent>
+						<xs:extension base="elementContents">
+							<xs:attribute name="lang" type="xs:string" use="required" />
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+
+			<!-- <default> element (one) -->
+			<xs:element name="default" type="elementContents" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
 
 	<!-- Root element: <page> -->
 	<xs:element name="page">
@@ -73,9 +92,9 @@
 				<!-- Allowable children -->
 
 				<!-- metadata elements (one each) -->
-				<xs:element name="title" minOccurs="0" maxOccurs="1" />
-				<xs:element name="description" minOccurs="0" maxOccurs="1" />
-				<xs:element name="keywords" minOccurs="0" maxOccurs="1" />
+				<xs:element name="title" type="metadataElement" minOccurs="0" maxOccurs="1" />
+				<xs:element name="description" type="metadataElement" minOccurs="0" maxOccurs="1" />
+				<xs:element name="keywords" type="metadataElement" minOccurs="0" maxOccurs="1" />
 
 				<!-- <element> element (many) -->
 				<xs:element name="element" minOccurs="0" maxOccurs="unbounded">
