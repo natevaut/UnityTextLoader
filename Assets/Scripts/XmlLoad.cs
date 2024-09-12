@@ -70,9 +70,6 @@ public class XmlLoad
             string keywordsList = parser.Parse(keywordsNode.ChildNodes);
             page.Keywords = keywordsList.Trim().Split(",");
         }
-        Debug.Log(page.Title);
-        Debug.Log(page.Description);
-        Debug.Log(String.Join(";", page.Keywords));
 
         // get list of <element>s contains the page data
         XmlNodeList elementNodes = pageNode.SelectNodes("element");
