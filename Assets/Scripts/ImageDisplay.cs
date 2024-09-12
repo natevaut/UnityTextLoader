@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ImageDisplay
 {
@@ -51,8 +52,8 @@ public class ImageDisplay
         );
         // Create game object and store texture sprite
         GameObject imageObject = new GameObject("LoadedImage");
-        SpriteRenderer spriteRenderer = imageObject.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite;
+        Image uiImage = imageObject.AddComponent<Image>();
+        uiImage.sprite = sprite;
 
         // Set transform to attr values
         imageObject.transform.parent = _canvasParent.transform;
