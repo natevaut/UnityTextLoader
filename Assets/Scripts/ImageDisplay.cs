@@ -36,10 +36,9 @@ public class ImageDisplay
         var srcAttribute = node.Attributes["src"]?.Value;
         if (string.IsNullOrEmpty(srcAttribute)) return;
 
-        float x = Helper.TryGetIntAttr(node, "x", 0);
-        float y = Helper.TryGetIntAttr(node, "y", 0);
-        float width = Helper.TryGetIntAttr(node, "width", 100);
-        float height = Helper.TryGetIntAttr(node, "height", 100);
+        int x = Helper.TryGetIntAttr(node, "x", 0);
+        int y = Helper.TryGetIntAttr(node, "y", 0);
+        float scale = Helper.TryGetFloatAttr(node, "scale", 1f);
 
         // Get image resource and make sprite from it
         string resPath = srcAttribute.Replace(".png", "").Replace(".jpg", "");
@@ -58,7 +57,7 @@ public class ImageDisplay
         // Set transform to attr values
         imageObject.transform.parent = _canvasParent.transform;
         imageObject.transform.position = new Vector3(x, y, 0);
-        imageObject.transform.localScale = new Vector3(width, height, 1);
+        imageObject.transform.localScale = new Vector3(scale, scale, 1);
 
         imageObject.tag = _pageLoader.TextDisplayTag;
     }

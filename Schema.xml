@@ -56,8 +56,7 @@
 							<xs:attribute name="src" type="xs:string" use="required" />
 							<xs:attribute name="x" type="xs:int" use="optional" />
 							<xs:attribute name="y" type="xs:int" use="optional" />
-							<xs:attribute name="width" type="xs:int" use="optional" />
-							<xs:attribute name="height" type="xs:int" use="optional" />
+							<xs:attribute name="scale" type="xs:decimal" use="optional" />
 						</xs:extension>
 					</xs:complexContent>
 				</xs:complexType>
@@ -65,6 +64,7 @@
 
 		</xs:choice>
 	</xs:complexType>
+	<!-- Declare type for translatable metadata elements -->
 	<xs:complexType name="metadataElement">
 		<xs:sequence>
 			<!-- Allowable children -->

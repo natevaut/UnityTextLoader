@@ -52,7 +52,7 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
 | `<font>` | Change font style | `color={string}`<br>`size={int}` |
 | `<link>` | Internal hyperlinking | `to={file.ext}` |
 | `<a>` | External hyperlinking | `href={url}` |
-| `<img>` | Image | `src={path/file}`<br>`x\|y\|width\|height={int}` |
+| `<img>` | Image | `src={path/file}`<br>`x\|y={int}`<br>`scale={float}` |
 
 #### Example
 
@@ -60,7 +60,7 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
 <?xml version="1.0" encoding="UTF-8"?>
 <page
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://github.com/Bloonspedia/UnityTextLoader/raw/1.3.0/Schema.xml"
+    xsi:noNamespaceSchemaLocation="https://github.com/Bloonspedia/UnityTextLoader/raw/1.4.0/Schema.xml"
 >
     <title>
         <translate lang="en">

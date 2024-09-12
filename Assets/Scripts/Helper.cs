@@ -17,4 +17,10 @@ public class Helper
     {
         return int.TryParse(node.Attributes[attr]?.Value, out int val) ? val : defaultVal;
     }
+
+    /// <inheritdoc cref="TryGetIntAttr(XmlNode, string, int)" />
+    public static float TryGetFloatAttr(XmlNode node, string attr, float defaultVal)
+    {
+        return float.TryParse(node.Attributes[attr]?.Value, out float val) ? val : defaultVal;
+    }
 }

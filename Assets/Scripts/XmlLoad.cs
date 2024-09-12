@@ -148,16 +148,6 @@ public class XmlLoad
         return element;
     }
 
-    public List<Page> GetPages()
-    {
-        return _pages;
-    }
-
-    public List<XmlNode> GetImageNodes()
-    {
-        return _imageNodes;
-    }
-
     private XmlNode ChooseRightTranslation(XmlNode node)
     {
         // Return null if no input
@@ -176,6 +166,16 @@ public class XmlLoad
 
         // Return null if neither <translate> nor <default> is found (which is a misuse of the schema)
         return null;
+    }
+
+    public List<Page> GetPages()
+    {
+        return _pages;
+    }
+
+    public List<XmlNode> GetImageNodes()
+    {
+        return _imageNodes;
     }
 
 }
