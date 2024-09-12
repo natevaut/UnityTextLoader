@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
 public class Page
 {
-    public string Title;
+    public string Title = "";
+    public string Description = "";
+    public string[] Keywords = Array.Empty<string>();
 
     private List<PageElement> _elements;
 

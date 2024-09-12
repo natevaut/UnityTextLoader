@@ -72,8 +72,10 @@
 			<xs:sequence>
 				<!-- Allowable children -->
 
-				<!-- <title> element (one) -->
+				<!-- metadata elements (one each) -->
 				<xs:element name="title" minOccurs="0" maxOccurs="1" />
+				<xs:element name="description" minOccurs="0" maxOccurs="1" />
+				<xs:element name="keywords" minOccurs="0" maxOccurs="1" />
 
 				<!-- <element> element (many) -->
 				<xs:element name="element" minOccurs="0" maxOccurs="unbounded">

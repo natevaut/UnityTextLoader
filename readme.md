@@ -31,6 +31,8 @@ These XML files must be validated by the schema given in [Schema.xml](Schema.xml
 | -- | -- | -- | -- | -- |
 | `page` | (root) | `title`, `element` | *none* |  Denotes a page containing a title and elements. |
 | `title` | `page` | `translate`, `default` | *none* | The title of a page. |
+| `description` | `page` | `translate`, `default` | *none* | The description of a page. |
+| `keywords` | `page` | `translate`, `default` | *none* | The comma-separated keywords for a page. |
 | `element` | `page` | `translate`, `default` | `x`, `y`, `width`, `height`, `fontSize` | An element to be placed on the page. |
 | `translate` | `title`, `element` | Free HTML | `lang` (required) | Content for a specific language.
 | `default` | `title`, `element` | Free HTML | *none* | Content for when a language is missing, or content for all applicable languages.
@@ -68,6 +70,20 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
             Seitenname
         </translate>
     </title>
+    <description>
+        <translate lang="en">
+            The best page!
+        </translate>
+        <translate lang="de">
+            Die beste Seite!
+        </translate>
+    </description>
+    <keywords>
+        <default>
+            example,best,page
+        </default>
+    </keywords>
+
     <element x="0" y="100" width="500" height="100" fontSize="20">
         <default>
             Lorem ipsum

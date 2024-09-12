@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -53,9 +54,21 @@ public class XmlLoad
             string titleText = parser.Parse(titleNode.ChildNodes);
             page.Title = titleText.Trim();
         }
-        else
+        // singular <desc> element
+        XmlNode descNode = pageNode.SelectSingleNode("description");
+        if (descNode != null)
         {
-            page.Title = "";
+            XmlFormatParser parser = new XmlFormatParser();
+            string descText = parser.Parse(descNode.ChildNodes);
+            page.Description = descText.Trim();
+        }
+        // singular <keywords> element
+        XmlNode keywordsNode = pageNode.SelectSingleNode("keywords");
+        if (keywordsNode != null)
+        {
+            XmlFormatParser parser = new XmlFormatParser();
+            string keywordsList = parser.Parse(keywordsNode.ChildNodes);
+            page.Keywords = keywordsList.Trim().Split(",");
         }
 
         // get list of <element>s contains the page data
