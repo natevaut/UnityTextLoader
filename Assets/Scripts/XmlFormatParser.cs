@@ -64,11 +64,11 @@ public class XmlFormatParser
                 var sizeMap = new Dictionary<string, int>
                 {
                     { "h1", 100 },
-                    { "h2", 90 },
-                    { "h3", 80 },
-                    { "h4", 70 },
-                    { "h5", 60 },
-                    { "h6", 50 }
+                    { "h2", 80 },
+                    { "h3", 70 },
+                    { "h4", 60 },
+                    { "h5", 50 },
+                    { "h6", 40 }
                 };
                 output.AppendFormat("<size={0}><b>", sizeMap[tag]);
                 ParseNodes(node.ChildNodes, output);
