@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Xml;
 
 public class PageLoader : MonoBehaviour
@@ -24,7 +23,7 @@ public class PageLoader : MonoBehaviour
     public void OpenFile(string filename)
     {
         ClearPage();
-        LoadTextFromFile(FullPath(filename));
+        LoadFromFile(FullPath(filename));
     }
 
     private void ClearPage()
@@ -36,16 +35,11 @@ public class PageLoader : MonoBehaviour
         }
     }
 
-    private void LoadTextFromFile(string filePath)
+    private void LoadFromFile(string filePath)
     {
-        // Load text file
-        string extlessFilePath = Regex.Replace(filePath, @"\.\w+$", ""); // remove extension as resource loader does not use it
-        var textFile = Resources.Load<TextAsset>(extlessFilePath);
-        string rawText = textFile.text;
+        // Read page XML
+        XmlLoad xmlLoader = PageReader.ReadXmlFile(filePath, Language);
 
-        // Load XML from text
-        XmlLoad xmlLoader = new XmlLoad(Language);
-        xmlLoader.ParseXml(rawText);
         // Display all text elements
         List<Page> pages = xmlLoader.GetPages();
         TextDisplay textDisplay = new TextDisplay(this, CanvasParent);
