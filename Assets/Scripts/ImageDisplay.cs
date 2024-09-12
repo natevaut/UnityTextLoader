@@ -55,7 +55,7 @@ public class ImageDisplay
         uiImage.sprite = sprite;
 
         // Set transform to attr values
-        imageObject.transform.parent = _canvasParent.transform;
+        imageObject.transform.SetParent(_canvasParent.transform);
         imageObject.transform.position = new Vector3(x, y, 0);
         imageObject.transform.localScale = new Vector3(scale, scale, 1);
 
