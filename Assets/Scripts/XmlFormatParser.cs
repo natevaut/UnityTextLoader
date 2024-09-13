@@ -70,9 +70,9 @@ public class XmlFormatParser
                     { "h5", 50 },
                     { "h6", 40 }
                 };
-                output.AppendFormat("<size={0}><b>", sizeMap[tag]);
+                output.AppendFormat("<br><size={0}><b>", sizeMap[tag]);
                 ParseNodes(node.ChildNodes, output);
-                output.Append("</b></size>");
+                output.Append("</b></size><br>");
                 break;
             case "link":
                 // Internal hyperlink
