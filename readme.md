@@ -34,6 +34,7 @@ These XML files must be validated by the schema given in [Schema.xml](Schema.xml
 | `description` | `page` | `translate`, `default` | *none* | The description of a page. |
 | `keywords` | `page` | `translate`, `default` | *none* | The comma-separated keywords for a page. |
 | `element` | `page` | `translate`, `default` | `x`, `y`, `width`, `height`, `fontSize` | An element to be placed on the page. |
+| `img` | `page`, `element` | *void* | `src`, `x`, `y`, `scale` | An image to be loaded onto the page. |
 | `translate` | `title`, `element` | Free HTML | `lang` (required) | Content for a specific language.
 | `default` | `title`, `element` | Free HTML | *none* | Content for when a language is missing, or content for all applicable languages.
 | Free HTML | `translate`, `default` | Free HTML | *depends* | A limited subset of HTML elements. [See below](#free-html).
@@ -52,7 +53,6 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
 | `<font>` | Change font style | `color={string}`<br>`size={int}` |
 | `<link>` | Internal hyperlinking | `to={file.ext}` |
 | `<a>` | External hyperlinking | `href={url}` |
-| `<img>` | Image | `src={path/file}`<br>`x\|y={int}`<br>`scale={float}` |
 
 #### Example
 
@@ -83,6 +83,8 @@ As well as plain text, the following pseudo-HTML tags are allowed inside "Free H
             example,best,page
         </default>
     </keywords>
+
+    <img src="img.png" x="100" y="200" scale="1.5" />
 
     <element x="0" y="100" width="500" height="100" fontSize="20">
         <default>

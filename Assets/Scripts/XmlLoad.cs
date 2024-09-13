@@ -81,6 +81,14 @@ public class XmlLoad
             page.AddElement(element);
         }
 
+        // get list of <img> elements
+        XmlNodeList imgNodes = pageNode.SelectNodes("img");
+        // save page images
+        foreach (XmlNode imgNode in imgNodes)
+        {
+            _imageNodes.Add(imgNode);
+        }
+
         return page;
     }
 
