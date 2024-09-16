@@ -19,6 +19,20 @@ Simply add the PageLoader script to your event object and adjust the settings as
 | File | string | The XML file to load (relative to the Data Folder). |
 | Language | string | The language code of the translation to select from the XML file.
 
+### Unity Script
+
+Read XML pages using the `PageReader` class.
+
+```c#
+string resourcePath /* relative to 'Assets/Resources/' */ = 'file.xml';
+string lang = "en";
+XmlLoad loadedXmlData = PageReader.ReadXmlFile(loadedAsset, lang);
+List<Page> pages = loadedXmlData.GetPages();
+foreach (Page page in pages) { Debug.Log(page.Title); }
+```
+
+## Content
+
 ### XML files
 
 Page content is stored in XML files.
