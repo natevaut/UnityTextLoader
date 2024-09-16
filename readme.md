@@ -31,6 +31,14 @@ List<Page> pages = loadedXmlData.GetPages();
 foreach (Page page in pages) { Debug.Log(page.Title); }
 ```
 
+To load a page into a scene that includes the `PageLoader` script while in any other scene, use `new LoadPageIntoScene`.
+
+```c#
+string filename = "file.xml";
+string sceneName = "PageReaderScene";
+new LoadPageIntoScene(filename, sceneName);
+```
+
 ## Content
 
 ### XML files
