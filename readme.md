@@ -27,8 +27,18 @@ Read XML pages using the `PageReader` class.
 string resourcePath /* relative to 'Assets/Resources/' */ = 'file.xml';
 string lang = "en";
 XmlLoad loadedXmlData = PageReader.ReadXmlFile(loadedAsset, lang);
+// Get Pages from loaded XML data
 List<Page> pages = loadedXmlData.GetPages();
-foreach (Page page in pages) { Debug.Log(page.Title); }
+foreach (Page page in pages) {
+    Debug.Log(page.Title);
+}
+// Get Images from loaded XML data
+List<XmlNode> imageNodes = loadedXmlData.GetImageNodes();
+XmlNode firstImageNode = imageNodes[0];
+if (firstImageNode.Attributes["src"] != null) {
+    string srcVal = firstImageNode.Attributes["src"].Value;
+    Sprite image = Resources.Load<Sprite>(srcVal);
+}
 ```
 
 To load a page into a scene that includes the `PageLoader` script while in any other scene, use `new LoadPageIntoScene`.
