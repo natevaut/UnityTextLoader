@@ -49,6 +49,43 @@ string sceneName = "PageReaderScene";
 new LoadPageIntoScene(filename, sceneName);
 ```
 
+## Interface
+
+```c#
+class Page
+{
+    new Page();
+    string Title;
+    string Description;
+    string[] Keywords;
+    List<PageElement> GetElements();
+}
+class PageElement
+{
+    int X;
+    int Y;
+    int Width;
+    int Height;
+    int FontSize;
+    string Text;
+}
+class XmlLoad
+{
+    new XmlLoad(string lang);
+    void ParseXml(string xml);
+    List<Page> GetPages();
+    List<XmlNode> GetImageNodes();
+}
+class PageReader
+{
+    static XmlLoad ReadXmlFile(string filepath, string language);
+}
+class LoadPageIntoScene
+{
+    new LoadPageIntoScene(string filePath, string sceneToLoad);
+}
+```
+
 ## Content
 
 ### XML files
