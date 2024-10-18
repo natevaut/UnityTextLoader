@@ -31,7 +31,11 @@ public class PageLoader : MonoBehaviour
         GameObject[] textObjects = GameObject.FindGameObjectsWithTag(TextDisplayTag);
         foreach (GameObject textObject in textObjects)
         {
-            GameObject.Destroy(textObject);
+            // Destry only if object is a child of the CanvasParent
+            if (textObject.transform.IsChildOf(CanvasParent.transform))
+            {
+                GameObject.Destroy(textObject);
+            }
         }
     }
 

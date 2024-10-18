@@ -6,14 +6,14 @@ Load and parse text content from file for display in Unity.
 
 ### Unity Editor
 
-Simply add the PageLoader script to your event object and adjust the settings as needed
+Simply add the PageLoader script to your event object and adjust the settings as needed!
 
 | Script: PageLoader |
 | -- |
 
 | Variable | Type | Purpose |
 | -- | -- | -- |
-| Canvas Parent | GameObject | The Unity Canvas game object in the scene. |
+| Canvas Parent | GameObject | A Unity Canvas game object (or a CanvasRenderer sub-object) in the scene. |
 | Text Display Tag | string | The Unity Tag given to all displayed text game objects. |
 | Data Folder | string | The folder containing XML files (relative to the `Resources` asset folder). |
 | File | string | The XML file to load (relative to the Data Folder). |
@@ -26,7 +26,7 @@ Read XML pages using the `PageReader` class.
 ```c#
 string resourcePath /* relative to 'Assets/Resources/' */ = 'file.xml';
 string lang = "en";
-XmlLoad loadedXmlData = PageReader.ReadXmlFile(loadedAsset, lang);
+XmlLoad loadedXmlData = PageReader.ReadXmlFile(resourcePath, lang);
 // Get Pages from loaded XML data
 List<Page> pages = loadedXmlData.GetPages();
 foreach (Page page in pages) {
@@ -44,7 +44,7 @@ if (firstImageNode.Attributes["src"] != null) {
 To load a page into a scene that includes the `PageLoader` script while in any other scene, use `new LoadPageIntoScene`.
 
 ```c#
-string filename = "file.xml";
+string filename /* relative to 'Assets/Resources/' */ = "file.xml";
 string sceneName = "PageReaderScene";
 new LoadPageIntoScene(filename, sceneName);
 ```
